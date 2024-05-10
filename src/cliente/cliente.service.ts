@@ -48,11 +48,11 @@ export class ClienteService {
     const cliente = this.findOne(dni);
 
     if (nombreYApellido) cliente.nombreYApellido = nombreYApellido;
-    if (telefono) cliente.nombreYApellido = telefono;
-    if (direccion) cliente.nombreYApellido = direccion;
-    if (email) cliente.nombreYApellido = email;
-    if (usuario) cliente.nombreYApellido = usuario;
-    if (password) cliente.nombreYApellido = password;
+    if (telefono) cliente.telefono = telefono;
+    if (direccion) cliente.direccion = direccion;
+    if (email) cliente.email = email;
+    if (usuario) cliente.usuario = usuario;
+    if (password) cliente.password = password;
 
     this.clientes = this.clientes.map(dbCliente => {
       if (dbCliente.dni === dni) return cliente;
