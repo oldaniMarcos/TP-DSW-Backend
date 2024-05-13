@@ -36,7 +36,7 @@ export class RazaController {
   update(
     @Param('codRaza', ParseIntPipe) codRaza: number,
     @Body() updateRazaDto: UpdateRazaDto,
-  ) {
+  ): Raza {
     return this.razaService.update(codRaza, updateRazaDto);
   }
 
