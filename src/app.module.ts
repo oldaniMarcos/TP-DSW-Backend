@@ -7,10 +7,12 @@ import { InsumoModule } from './insumo/insumo.module';
 import { EspecieModule } from './especie/especie.module';
 import { VeterinarioModule } from './veterinario/veterinario.module';
 import { AnimalModule } from './animal/animal.module.js';
+import { AtencionModule } from './atencion/atencion.module';
+import { PrecioAtencionModule } from './precio-atencion/precio-atencion.module';
 
 @Module({
-  imports: [ClienteModule, RazaModule, InsumoModule, EspecieModule, VeterinarioModule, AnimalModule],
+  imports: [ClienteModule, RazaModule, InsumoModule, EspecieModule, VeterinarioModule, AnimalModule, AtencionModule, PrecioAtencionModule],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }
