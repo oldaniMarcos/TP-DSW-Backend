@@ -10,27 +10,28 @@ export class InsumoService {
       codInsumo: 1,
       descripcion: 'Comilona',
       stock: 30,
-      fechaVencimiento: new Date(2024, 10, 25), //Si quiero cambiar la fecha en postman por ejemplo, el JSON sería {"fechaVencimiento": "2012-01-12T03:00:00.000Z"} (anda pero no se si esta bien jeje)
+      fechaVencimiento: '2024-10-25',
     },
     {
       codInsumo: 2,
       descripcion: 'Vacuna vencida',
       stock: 0,
-      fechaVencimiento: new Date(2006, 0, 12),
+      fechaVencimiento: '2006-0-12',
     },
     {
       codInsumo: 3,
       descripcion: 'Vacuna disponible',
       stock: 15,
-      fechaVencimiento: new Date(2025, 7, 8),
+      fechaVencimiento: '2025-7-8',
     },
   ];
 
-  create({ descripcion }: CreateInsumoDto): Insumo {
+  create({ descripcion, stock }: CreateInsumoDto): Insumo {
     const insumo = new Insumo();
     insumo.codInsumo =
       Math.max(...this.insumos.map((insumo) => insumo.codInsumo), 0) + 1;
     insumo.descripcion = descripcion;
+    insumo.stock = stock;
     this.insumos.push(insumo);
     return insumo;
   }

@@ -1,5 +1,4 @@
-import { Type } from 'class-transformer';
-import { IsDate, IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsDateString, IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
 export class CreateInsumoDto {
   @IsString()
@@ -10,8 +9,7 @@ export class CreateInsumoDto {
   @IsNotEmpty()
   stock: number;
 
-  @Type(() => Date)
-  @IsDate()
+  @IsDateString()
   @IsNotEmpty()
-  fechaVencimiento: Date;
+  fechaVencimiento: string;
 }
