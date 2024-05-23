@@ -10,9 +10,10 @@ import { AnimalModule } from './animal/animal.module.js';
 import { AtencionModule } from './atencion/atencion.module';
 import { PrecioAtencionModule } from './precio-atencion/precio-atencion.module';
 import { TipoInsumoModule } from './tipo-insumo/tipo-insumo.module';
+import { PrecioInsumoModule } from './precio-insumo/precio-insumo.module';
 
 @Module({
-  imports: [ClienteModule, RazaModule, InsumoModule, EspecieModule, VeterinarioModule, AnimalModule, AtencionModule, PrecioAtencionModule, TipoInsumoModule],
+  imports: [ClienteModule, RazaModule, InsumoModule, EspecieModule, VeterinarioModule, AnimalModule, AtencionModule, PrecioAtencionModule, TipoInsumoModule, PrecioInsumoModule],
   controllers: [AppController],
   providers: [AppService],
 })
