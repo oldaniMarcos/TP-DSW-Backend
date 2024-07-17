@@ -11,9 +11,30 @@ import { AtencionModule } from './atencion/atencion.module';
 import { PrecioAtencionModule } from './precio-atencion/precio-atencion.module';
 import { TipoInsumoModule } from './tipo-insumo/tipo-insumo.module';
 import { PrecioInsumoModule } from './precio-insumo/precio-insumo.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
-  imports: [ClienteModule, RazaModule, InsumoModule, EspecieModule, VeterinarioModule, AnimalModule, AtencionModule, PrecioAtencionModule, TipoInsumoModule, PrecioInsumoModule],
+  imports: [
+    TypeOrmModule.forRoot({
+      type: 'mysql',
+      host: 'localhost',
+      port: 3306,
+      username: 'root',
+      password: 'root',
+      database: 'veterinaria_dsw',
+      entities: [],
+      synchronize: true,
+    }),
+    ClienteModule,
+    RazaModule,
+    InsumoModule,
+    EspecieModule,
+    VeterinarioModule, AnimalModule,
+    AtencionModule,
+    PrecioAtencionModule,
+    TipoInsumoModule,
+    PrecioInsumoModule
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
