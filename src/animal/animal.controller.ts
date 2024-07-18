@@ -6,30 +6,32 @@ import { Animal } from './entities/animal.entity.js';
 
 @Controller('animal')
 export class AnimalController {
-  constructor(private readonly animalService: AnimalService) {}
+  constructor(private readonly animalService: AnimalService) { }
 
   @Post()
-  create(@Body() createAnimalDto: CreateAnimalDto): Animal {
+  create(@Body() createAnimalDto: CreateAnimalDto): Promise<Animal> {
     return this.animalService.create(createAnimalDto);
   }
 
   @Get()
-  findAll(): Animal[] {
+  findAll(): Promise<Animal[]> {
     return this.animalService.findAll();
   }
 
   @Get(':nroHistClinica')
-  findOne(@Param('nroHistClinica') nroHistClinica: number): Animal {
+  findOne(@Param('nroHistClinica') nroHistClinica: number): Promise<Animal> {
     return this.animalService.findOne(nroHistClinica);
   }
 
+
   @Patch(':nroHistClinica')
-  update(@Param('nroHistClinica') nroHistClinica: number, @Body() updateAnimalDto: UpdateAnimalDto): Animal {
+  async update(@Param('nroHistClinica') nroHistClinica: number, @Body() updateAnimalDto: UpdateAnimalDto): Promise<Animal> {
     return this.animalService.update(nroHistClinica, updateAnimalDto);
   }
 
+
   @Delete(':nroHistClinica')
-  remove(@Param('nroHistClinica') nroHistClinica: number) {
+  remove(@Param('nroHistClinica') nroHistClinica: number): Promise<void> {
     return this.animalService.remove(nroHistClinica);
   }
 }
