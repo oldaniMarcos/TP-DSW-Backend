@@ -9,27 +9,27 @@ export class ClienteController {
   constructor(private readonly clienteService: ClienteService) { }
 
   @Post()
-  create(@Body() createClienteDto: CreateClienteDto): Cliente {
+  create(@Body() createClienteDto: CreateClienteDto): Promise<Cliente> {
     return this.clienteService.create(createClienteDto);
   }
 
   @Get()
-  findAll(): Cliente[] {
+  findAll(): Promise<Cliente[]> {
     return this.clienteService.findAll();
   }
 
   @Get(':dni')
-  findOne(@Param('dni', ParseIntPipe) dni: number): Cliente {
+  findOne(@Param('dni', ParseIntPipe) dni: number): Promise<Cliente> {
     return this.clienteService.findOne(dni);
   }
 
   @Patch(':dni')
-  update(@Param('dni', ParseIntPipe) dni: number, @Body() updateClienteDto: UpdateClienteDto): Cliente {
+  update(@Param('dni', ParseIntPipe) dni: number, @Body() updateClienteDto: UpdateClienteDto): Promise<Cliente> {
     return this.clienteService.update(dni, updateClienteDto);
   }
 
   @Delete(':dni')
-  remove(@Param('dni', ParseIntPipe) dni: number) {
+  remove(@Param('dni', ParseIntPipe) dni: number): Promise<void> {
     return this.clienteService.remove(dni);
   }
 }

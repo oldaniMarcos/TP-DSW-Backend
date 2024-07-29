@@ -2,53 +2,38 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateEspecieDto } from './dto/create-especie.dto';
 import { UpdateEspecieDto } from './dto/update-especie.dto';
 import { Especie } from './entities/especie.entity.js';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class EspecieService {
 
-  private especies: Especie[] = [
-    { codEspecie: 1, descripcion: 'Perro' }, 
-    { codEspecie: 2, descripcion: 'Gato' },
-    { codEspecie: 3, descripcion: 'Pajaro' }
-  ];
+  constructor(
+    @InjectRepository(Especie)
+    private readonly especieRepository: Repository<Especie>
+  ) { }
 
-  create(createEspecieDto: CreateEspecieDto): Especie {
+  create(createEspecieDto: CreateEspecieDto): Promise<Especie> {
     const especie = new Especie();
-    especie.codEspecie = Math.max(...this.especies.map((especie) => especie.codEspecie), 0) + 1;
     especie.descripcion = createEspecieDto.descripcion;
-    this.especies.push(especie);
-    return especie;
+    return this.especieRepository.save(especie);
   }
 
 
-  findAll(): Especie[] {
-    return this.especies;
+  async findAll(): Promise<Especie[]> {
+    return this.especieRepository.find()
   }
 
-  findOne(codEspecie: number): Especie {
-    const especie = this.especies.find(especie => especie.codEspecie === codEspecie)
-
-    if (!especie) throw new NotFoundException(`Especie con código ${codEspecie} no fue encontrada`)
-
-    return especie;
+  findOne(codEspecie: number): Promise<Especie> {
+    return this.especieRepository.findOneBy({ codEspecie: codEspecie })
   }
 
-  update(codEspecie: number, updateEspecieDto: UpdateEspecieDto): Especie {
-    const { descripcion } = updateEspecieDto;
-    const especie = this.findOne(codEspecie);
-
-    if (descripcion) especie.descripcion = descripcion;
-
-    this.especies = this.especies.map(dbEspecie => {
-      if (dbEspecie.codEspecie === codEspecie) return especie;
-      return dbEspecie;
-    })
-    return especie;
+  async update(codEspecie: number, updateEspecieDto: UpdateEspecieDto): Promise<Especie> {
+    await this.especieRepository.update(codEspecie, updateEspecieDto);
+    return this.especieRepository.findOneBy({ codEspecie })
   }
 
-  remove(codEspecie: number) {
-    this.findOne(codEspecie);
-
-    this.especies = this.especies.filter(especie => especie.codEspecie !== codEspecie);
+  async remove(codEspecie: number): Promise<void> {
+    await this.especieRepository.delete(codEspecie)
   }
 }

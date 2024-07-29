@@ -4,7 +4,7 @@ export class CreateClienteDto {
 
   @IsNumber()
   @IsNotEmpty()
-  dni: number;
+  dni: string;
 
   @IsString()
   @IsNotEmpty()

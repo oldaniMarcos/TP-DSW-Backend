@@ -9,27 +9,27 @@ export class AtencionController {
   constructor(private readonly atencionService: AtencionService) { }
 
   @Post()
-  create(@Body() createAtencionDto: CreateAtencionDto): Atencion {
+  create(@Body() createAtencionDto: CreateAtencionDto): Promise<Atencion> {
     return this.atencionService.create(createAtencionDto);
   }
 
   @Get()
-  findAll(): Atencion[] {
+  findAll(): Promise<Atencion[]> {
     return this.atencionService.findAll();
   }
 
   @Get(':idAtencion')
-  findOne(@Param('idAtencion', ParseIntPipe) idAtencion: number): Atencion {
+  findOne(@Param('idAtencion', ParseIntPipe) idAtencion: number): Promise<Atencion> {
     return this.atencionService.findOne(idAtencion);
   }
 
   @Patch(':idAtencion')
-  update(@Param('idAtencion', ParseIntPipe) idAtencion: number, @Body() updateAtencionDto: UpdateAtencionDto): Atencion {
+  update(@Param('idAtencion', ParseIntPipe) idAtencion: number, @Body() updateAtencionDto: UpdateAtencionDto): Promise<Atencion> {
     return this.atencionService.update(idAtencion, updateAtencionDto);
   }
 
   @Delete(':idAtencion')
-  remove(@Param('idAtencion', ParseIntPipe) idAtencion: number) {
+  remove(@Param('idAtencion', ParseIntPipe) idAtencion: number): Promise<void> {
     return this.atencionService.remove(idAtencion);
   }
 }

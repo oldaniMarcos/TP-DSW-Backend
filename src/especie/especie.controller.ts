@@ -6,30 +6,31 @@ import { Especie } from './entities/especie.entity.js';
 
 @Controller('especie')
 export class EspecieController {
-  constructor(private readonly especieService: EspecieService) {}
+  constructor(private readonly especieService: EspecieService) { }
 
   @Post()
-  create(@Body() createEspecieDto: CreateEspecieDto): Especie {
+  create(@Body() createEspecieDto: CreateEspecieDto): Promise<Especie> {
     return this.especieService.create(createEspecieDto);
   }
 
   @Get()
-  findAll(): Especie[] {
+  findAll(): Promise<Especie[]> {
     return this.especieService.findAll();
   }
 
   @Get(':codEspecie')
-  findOne(@Param('codEspecie', ParseIntPipe) codEspecie: number): Especie {
+  findOne(@Param('codEspecie', ParseIntPipe) codEspecie: number): Promise<Especie> {
+    Promise<Especie>
     return this.especieService.findOne(codEspecie);
   }
 
   @Patch(':codEspecie')
-  update(@Param('codEspecie', ParseIntPipe) codEspecie: number, @Body() updateEspecieDto: UpdateEspecieDto): Especie {
+  update(@Param('codEspecie', ParseIntPipe) codEspecie: number, @Body() updateEspecieDto: UpdateEspecieDto): Promise<Especie> {
     return this.especieService.update(codEspecie, updateEspecieDto);
   }
 
   @Delete(':codEspecie')
-  remove(@Param('codEspecie', ParseIntPipe) codEspecie: number) {
+  remove(@Param('codEspecie', ParseIntPipe) codEspecie: number): Promise<void> {
     return this.especieService.remove(codEspecie);
   }
 }

@@ -13,6 +13,9 @@ import { TipoInsumoModule } from './tipo-insumo/tipo-insumo.module';
 import { PrecioInsumoModule } from './precio-insumo/precio-insumo.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Animal } from './animal/entities/animal.entity.js';
+import { Atencion } from './atencion/entities/atencion.entity.js';
+import { Cliente } from './cliente/entities/cliente.entity.js';
+import { Especie } from './especie/entities/especie.entity.js';
 
 @Module({
   imports: [
@@ -23,7 +26,7 @@ import { Animal } from './animal/entities/animal.entity.js';
       username: 'root',
       password: 'root',
       database: 'veterinaria_dsw',
-      entities: [Animal],
+      entities: [Animal, Atencion, Cliente, Especie],
       synchronize: true,
     }),
     ClienteModule,

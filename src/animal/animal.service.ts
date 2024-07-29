@@ -13,21 +13,11 @@ export class AnimalService {
     private readonly animalRepository: Repository<Animal>
   ) { }
 
-  /*
-  private animales: Animal[] = [
-    { id: 1, nroHistClinica: 1, nombre: 'Luli', fechaNac: '2016-03-20', edad: 8 },
-    { id: 2, nroHistClinica: 2, nombre: 'Minino', fechaNac: '2014-10-17', edad: 9 },
-    { id: 3, nroHistClinica: 1, nombre: 'Moqui', fechaNac: '2020-09-10', edad: 3 },
-  ];
-  */
-
   create(createAnimalDto: CreateAnimalDto): Promise<Animal> {
     const animal = new Animal();
-    //animal.nroHistClinica = Math.max(...this.animales.map((animal) => animal.nroHistClinica), 0) + 1;
     animal.nombre = createAnimalDto.nombre;
     animal.fechaNac = createAnimalDto.fechaNac;
     animal.edad = createAnimalDto.edad;
-    //this.animales.push(animal);
     return this.animalRepository.save(animal);
   }
 
