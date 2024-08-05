@@ -16,6 +16,7 @@ import { Animal } from './animal/entities/animal.entity.js';
 import { Atencion } from './atencion/entities/atencion.entity.js';
 import { Cliente } from './cliente/entities/cliente.entity.js';
 import { Especie } from './especie/entities/especie.entity.js';
+import { Insumo } from './insumo/entities/insumo.entity.js';
 
 @Module({
   imports: [
@@ -26,7 +27,7 @@ import { Especie } from './especie/entities/especie.entity.js';
       username: 'root',
       password: 'root',
       database: 'veterinaria_dsw',
-      entities: [Animal, Atencion, Cliente, Especie],
+      entities: [Animal, Atencion, Cliente, Especie, Insumo],
       synchronize: true,
     }),
     ClienteModule,

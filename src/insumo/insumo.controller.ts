@@ -18,17 +18,17 @@ export class InsumoController {
   constructor(private readonly insumoService: InsumoService) {}
 
   @Post()
-  create(@Body() createInsumoDto: CreateInsumoDto): Insumo {
+  create(@Body() createInsumoDto: CreateInsumoDto): Promise<Insumo> {
     return this.insumoService.create(createInsumoDto);
   }
 
   @Get()
-  findAll(): Insumo[] {
+  findAll(): Promise<Insumo[]> {
     return this.insumoService.findAll();
   }
 
   @Get(':codInsumo')
-  findOne(@Param('codInsumo', ParseIntPipe) codInsumo: number): Insumo {
+  findOne(@Param('codInsumo', ParseIntPipe) codInsumo: number): Promise<Insumo> {
     return this.insumoService.findOne(codInsumo);
   }
 
@@ -36,12 +36,12 @@ export class InsumoController {
   update(
     @Param('codInsumo', ParseIntPipe) codInsumo: number,
     @Body() updateInsumoDto: UpdateInsumoDto,
-  ): Insumo {
+  ): Promise<Insumo> {
     return this.insumoService.update(codInsumo, updateInsumoDto);
   }
 
   @Delete(':codInsumo')
-  remove(@Param('codInsumo', ParseIntPipe) codInsumo: number) {
+  remove(@Param('codInsumo', ParseIntPipe) codInsumo: number): Promise<void> {
     return this.insumoService.remove(codInsumo);
   }
 }
