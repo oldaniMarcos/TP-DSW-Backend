@@ -2,13 +2,13 @@ import { IsNotEmpty, IsNumber, IsString } from "class-validator";
 
 export class CreateVeterinarioDto {
 
-    @IsNumber()
+    @IsString()
     @IsNotEmpty()
-    nroMatricula: number;
+    nroMatricula: string;
 
-    @IsNumber()
+    @IsString()
     @IsNotEmpty()
-    dni: number;
+    dni: string;
 
     @IsString()
     @IsNotEmpty()

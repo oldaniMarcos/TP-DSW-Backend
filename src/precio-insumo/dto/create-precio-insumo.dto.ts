@@ -1,9 +1,9 @@
 import { IsDateString, IsNotEmpty, IsNumber } from 'class-validator';
 
 export class CreatePrecioInsumoDto {
-  @IsNumber()
+  /*@IsNumber()
   @IsNotEmpty()
-  codInsumo: number;
+  codInsumo: number;*/
 
   @IsDateString()
   @IsNotEmpty()

@@ -18,32 +18,28 @@ export class TipoInsumoController {
   constructor(private readonly tipoInsumoService: TipoInsumoService) {}
 
   @Post()
-  create(@Body() createTipoInsumoDto: CreateTipoInsumoDto): TipoInsumo {
+  create(@Body() createTipoInsumoDto: CreateTipoInsumoDto): Promise<TipoInsumo> {
     return this.tipoInsumoService.create(createTipoInsumoDto);
   }
 
   @Get()
-  findAll(): TipoInsumo[] {
+  findAll(): Promise<TipoInsumo[]> {
     return this.tipoInsumoService.findAll();
   }
 
   @Get(':codTipoInsumo')
-  findOne(
-    @Param('codTipoInsumo', ParseIntPipe) codTipoInsumo: number,
-  ): TipoInsumo {
+  findOne(@Param('codTipoInsumo', ParseIntPipe) codTipoInsumo: number): Promise<TipoInsumo> {
     return this.tipoInsumoService.findOne(codTipoInsumo);
   }
 
   @Patch(':codTipoInsumo')
-  update(
-    @Param('codTipoInsumo', ParseIntPipe) codTipoInsumo: number,
-    @Body() updateTipoInsumoDto: UpdateTipoInsumoDto,
-  ): TipoInsumo {
+  update(@Param('codTipoInsumo', ParseIntPipe) codTipoInsumo: number, 
+  @Body() updateTipoInsumoDto: UpdateTipoInsumoDto): Promise<TipoInsumo> {
     return this.tipoInsumoService.update(codTipoInsumo, updateTipoInsumoDto);
   }
 
   @Delete(':codTipoInsumo')
-  remove(@Param('codTipoInsumo', ParseIntPipe) codTipoInsumo: number) {
+  remove(@Param('codTipoInsumo', ParseIntPipe) codTipoInsumo: number): Promise<void> {
     return this.tipoInsumoService.remove(codTipoInsumo);
   }
 }

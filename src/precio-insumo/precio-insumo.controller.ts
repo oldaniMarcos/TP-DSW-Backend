@@ -18,35 +18,28 @@ export class PrecioInsumoController {
   constructor(private readonly precioInsumoService: PrecioInsumoService) {}
 
   @Post()
-  create(@Body() createPrecioInsumoDto: CreatePrecioInsumoDto): PrecioInsumo {
+  create(@Body() createPrecioInsumoDto: CreatePrecioInsumoDto): Promise<PrecioInsumo> {
     return this.precioInsumoService.create(createPrecioInsumoDto);
   }
 
   @Get()
-  findAll(): PrecioInsumo[] {
+  findAll():Promise<PrecioInsumo[]> {
     return this.precioInsumoService.findAll();
   }
 
   @Get(':codPrecioInsumo')
-  findOne(
-    @Param('codPrecioInsumo', ParseIntPipe) codPrecioInsumo: number,
-  ): PrecioInsumo {
+  findOne(@Param('codPrecioInsumo', ParseIntPipe) codPrecioInsumo: number): Promise<PrecioInsumo> {
     return this.precioInsumoService.findOne(codPrecioInsumo);
   }
 
   @Patch(':codPrecioInsumo')
-  update(
-    @Param('codPrecioInsumo', ParseIntPipe) codPrecioInsumo: number,
-    @Body() updatePrecioInsumoDto: UpdatePrecioInsumoDto,
-  ): PrecioInsumo {
-    return this.precioInsumoService.update(
-      codPrecioInsumo,
-      updatePrecioInsumoDto,
-    );
+  update(@Param('codPrecioInsumo', ParseIntPipe) codPrecioInsumo: number, 
+  @Body() updatePrecioInsumoDto: UpdatePrecioInsumoDto): Promise<PrecioInsumo> {
+    return this.precioInsumoService.update(codPrecioInsumo,updatePrecioInsumoDto);
   }
 
   @Delete(':codPrecioInsumo')
-  remove(@Param('codPrecioInsumo', ParseIntPipe) codPrecioInsumo: number) {
+  remove(@Param('codPrecioInsumo', ParseIntPipe) codPrecioInsumo: number):Promise<void> {
     return this.precioInsumoService.remove(codPrecioInsumo);
   }
 }

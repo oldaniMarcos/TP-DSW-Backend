@@ -10,28 +10,29 @@ export class VeterinarioController {
   constructor(private readonly veterinarioService: VeterinarioService) {}
 
   @Post()
-  create(@Body() createVeterinarioDto: CreateVeterinarioDto): Veterinario {
+  create(@Body() createVeterinarioDto: CreateVeterinarioDto): Promise<Veterinario> {
     return this.veterinarioService.create(createVeterinarioDto);
   }
 
   @Get()
-  findAll(): Veterinario[] {
+  findAll(): Promise<Veterinario[]> {
     return this.veterinarioService.findAll()
   }
 
-  @Get(':nroMatricula')
-  findOne(@Param('nroMatricula', ParseIntPipe) nroMatricula: number): Veterinario {
-    return this.veterinarioService.findOne(nroMatricula);
+  @Get(':idVeterinario')
+  findOne(@Param('idVeterinario', ParseIntPipe) idVeterinario: number): Promise<Veterinario> {
+    return this.veterinarioService.findOne(idVeterinario);
   }
 
 
-  @Patch(':nroMatricula')
-  update(@Param('nroMatricula', ParseIntPipe) nroMatricula: number, @Body() updateVeterinarioDto: UpdateVeterinarioDto): Veterinario {
-    return this.veterinarioService.update(nroMatricula, updateVeterinarioDto);
+  @Patch(':idVeterinario')
+  update(@Param('idVeterinario', ParseIntPipe) idVeterinario: number, 
+  @Body() updateVeterinarioDto: UpdateVeterinarioDto): Promise<Veterinario> {
+    return this.veterinarioService.update(idVeterinario, updateVeterinarioDto);
   }
 
-  @Delete(':nroMatricula')
-  remove(@Param('nroMatricula', ParseIntPipe) nroMatricula: number) {
-    return this.veterinarioService.remove(nroMatricula);
+  @Delete(':idVeterinario')
+  remove(@Param('idVeterinario', ParseIntPipe) idVeterinario: number): Promise<void> {
+    return this.veterinarioService.remove(idVeterinario);
   }
 }

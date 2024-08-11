@@ -9,27 +9,28 @@ export class PrecioAtencionController {
   constructor(private readonly precioAtencionService: PrecioAtencionService) { }
 
   @Post()
-  create(@Body() createPrecioAtencionDto: CreatePrecioAtencionDto): PrecioAtencion {
+  create(@Body() createPrecioAtencionDto: CreatePrecioAtencionDto): Promise<PrecioAtencion> {
     return this.precioAtencionService.create(createPrecioAtencionDto);
   }
 
   @Get()
-  findAll(): PrecioAtencion[] {
+  findAll(): Promise<PrecioAtencion[]> {
     return this.precioAtencionService.findAll();
   }
 
   @Get(':idPrecioAtencion')
-  findOne(@Param('idPrecioAtencion', ParseIntPipe) idPrecioAtencion: number): PrecioAtencion {
+  findOne(@Param('idPrecioAtencion', ParseIntPipe) idPrecioAtencion: number): Promise<PrecioAtencion> {
     return this.precioAtencionService.findOne(idPrecioAtencion);
   }
 
   @Patch(':idPrecioAtencion')
-  update(@Param('idPrecioAtencion', ParseIntPipe) idPrecioAtencion: number, @Body() updatePrecioAtencionDto: UpdatePrecioAtencionDto): PrecioAtencion {
+  update(@Param('idPrecioAtencion', ParseIntPipe) idPrecioAtencion: number, 
+    @Body() updatePrecioAtencionDto: UpdatePrecioAtencionDto): Promise<PrecioAtencion> {
     return this.precioAtencionService.update(idPrecioAtencion, updatePrecioAtencionDto);
   }
 
   @Delete(':idPrecioAtencion')
-  remove(@Param('idPrecioAtencion', ParseIntPipe) idPrecioAtencion: number) {
+  remove(@Param('idPrecioAtencion', ParseIntPipe) idPrecioAtencion: number): Promise<void> {
     return this.precioAtencionService.remove(idPrecioAtencion);
   }
 }

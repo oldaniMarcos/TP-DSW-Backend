@@ -18,30 +18,28 @@ export class RazaController {
   constructor(private readonly razaService: RazaService) {}
 
   @Post()
-  create(@Body() createRazaDto: CreateRazaDto): Raza {
+  create(@Body() createRazaDto: CreateRazaDto): Promise<Raza> {
     return this.razaService.create(createRazaDto);
   }
 
   @Get()
-  findAll(): Raza[] {
+  findAll(): Promise<Raza[]> {
     return this.razaService.findAll();
   }
 
   @Get(':codRaza')
-  findOne(@Param('codRaza', ParseIntPipe) codRaza: number): Raza {
+  findOne(@Param('codRaza', ParseIntPipe) codRaza: number): Promise<Raza> {
     return this.razaService.findOne(codRaza);
   }
 
   @Patch(':codRaza')
-  update(
-    @Param('codRaza', ParseIntPipe) codRaza: number,
-    @Body() updateRazaDto: UpdateRazaDto,
-  ): Raza {
+  update(@Param('codRaza', ParseIntPipe) codRaza: number, 
+  @Body() updateRazaDto: UpdateRazaDto): Promise<Raza> {
     return this.razaService.update(codRaza, updateRazaDto);
   }
 
   @Delete(':codRaza')
-  remove(@Param('codRaza', ParseIntPipe) codRaza: number) {
+  remove(@Param('codRaza', ParseIntPipe) codRaza: number): Promise<void> {
     return this.razaService.remove(codRaza);
   }
 }

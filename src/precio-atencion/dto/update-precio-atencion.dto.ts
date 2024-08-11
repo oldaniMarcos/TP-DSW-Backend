@@ -4,10 +4,10 @@ import { IsDateString, IsNotEmpty, IsNumber, IsOptional } from 'class-validator'
 
 export class UpdatePrecioAtencionDto extends PartialType(CreatePrecioAtencionDto) {
 
-  @IsNumber()
+  /*@IsNumber()
   @IsNotEmpty()
   @IsOptional()
-  idAtencion?: number;
+  idAtencion?: number;*/
 
   @IsDateString()
   @IsNotEmpty()

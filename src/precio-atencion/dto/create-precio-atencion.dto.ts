@@ -2,9 +2,9 @@ import { IsDateString, IsNotEmpty, IsNumber } from "class-validator";
 
 export class CreatePrecioAtencionDto {
 
-  @IsNumber()
+  /*@IsNumber()
   @IsNotEmpty()
-  idAtencion: number;
+  idAtencion: number;*/
 
   @IsDateString()
   @IsNotEmpty()

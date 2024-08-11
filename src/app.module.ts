@@ -17,6 +17,11 @@ import { Atencion } from './atencion/entities/atencion.entity.js';
 import { Cliente } from './cliente/entities/cliente.entity.js';
 import { Especie } from './especie/entities/especie.entity.js';
 import { Insumo } from './insumo/entities/insumo.entity.js';
+import { PrecioAtencion } from './precio-atencion/entities/precio-atencion.entity.js';
+import { PrecioInsumo } from './precio-insumo/entities/precio-insumo.entity.js';
+import { Raza } from './raza/entities/raza.entity.js';
+import { TipoInsumo } from './tipo-insumo/entities/tipo-insumo.entity.js';
+import { Veterinario } from './veterinario/entities/veterinario.entity.js';
 
 @Module({
   imports: [
@@ -27,7 +32,8 @@ import { Insumo } from './insumo/entities/insumo.entity.js';
       username: 'root',
       password: 'root',
       database: 'veterinaria_dsw',
-      entities: [Animal, Atencion, Cliente, Especie, Insumo],
+      entities: [Animal, Atencion, Cliente, Especie, Insumo, 
+        PrecioAtencion, PrecioInsumo, Raza, TipoInsumo, Veterinario],
       synchronize: true,
     }),
     ClienteModule,

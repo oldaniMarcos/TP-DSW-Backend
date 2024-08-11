@@ -2,68 +2,37 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateTipoInsumoDto } from './dto/create-tipo-insumo.dto';
 import { UpdateTipoInsumoDto } from './dto/update-tipo-insumo.dto';
 import { TipoInsumo } from './entities/tipo-insumo.entity';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class TipoInsumoService {
-  private tipoInsumos: TipoInsumo[] = [
-    {
-      codTipoInsumo: 1,
-      descripcion: 'Vacuna',
-    },
-    {
-      codTipoInsumo: 2,
-      descripcion: 'Correa',
-    },
-    {
-      codTipoInsumo: 3,
-      descripcion: 'Medicacion',
-    },
-  ];
-  create({ descripcion }: CreateTipoInsumoDto): TipoInsumo {
+
+  constructor(
+    @InjectRepository(TipoInsumo)
+    private readonly tipoInsumoRepository: Repository<TipoInsumo>
+  ) {}
+
+  create(createTipoInsumoDto: CreateTipoInsumoDto): Promise<TipoInsumo> {
     const tipoInsumo = new TipoInsumo();
-    tipoInsumo.codTipoInsumo =
-      Math.max(
-        ...this.tipoInsumos.map((tipoInsumo) => tipoInsumo.codTipoInsumo),
-        0,
-      ) + 1;
-    tipoInsumo.descripcion = descripcion;
-    this.tipoInsumos.push(tipoInsumo);
-    return tipoInsumo;
+    tipoInsumo.descripcion = createTipoInsumoDto.descripcion;
+    return this.tipoInsumoRepository.save(tipoInsumo);
   }
 
-  findAll(): TipoInsumo[] {
-    return this.tipoInsumos;
+  async findAll(): Promise<TipoInsumo[]> {
+    return this.tipoInsumoRepository.find();
   }
 
-  findOne(codTipoInsumo: number): TipoInsumo {
-    const tipoInsumo = this.tipoInsumos.find(
-      (tipoInsumo) => tipoInsumo.codTipoInsumo === codTipoInsumo,
-    );
-    if (!tipoInsumo)
-      throw new NotFoundException(
-        `Insumo con código de insumo ${codTipoInsumo} no encontrado.`,
-      );
-    return tipoInsumo;
+  findOne(codTipoInsumo: number): Promise<TipoInsumo> {
+    return this.tipoInsumoRepository.findOneBy( {codTipoInsumo: codTipoInsumo} );
   }
 
-  update(
-    codTipoInsumo: number,
-    updateTipoInsumoDto: UpdateTipoInsumoDto,
-  ): TipoInsumo {
-    const { descripcion } = updateTipoInsumoDto;
-    const tipoInsumo = this.findOne(codTipoInsumo);
-    if (descripcion) tipoInsumo.descripcion = descripcion;
-    this.tipoInsumos = this.tipoInsumos.map((dbTipoInsumo) => {
-      if (dbTipoInsumo.codTipoInsumo === codTipoInsumo) return tipoInsumo;
-      return dbTipoInsumo;
-    });
-    return tipoInsumo;
+  async update(codTipoInsumo: number, updateTipoInsumoDto: UpdateTipoInsumoDto): Promise<TipoInsumo> {
+    await this.tipoInsumoRepository.update(codTipoInsumo, updateTipoInsumoDto)
+    return this.tipoInsumoRepository.findOneBy({codTipoInsumo});
   }
 
-  remove(codTipoInsumo: number) {
-    this.findOne(codTipoInsumo);
-    this.tipoInsumos = this.tipoInsumos.filter(
-      (tipoInsumo) => tipoInsumo.codTipoInsumo !== codTipoInsumo,
-    );
+  async remove(codTipoInsumo: number): Promise<void> {
+    await this.tipoInsumoRepository.delete(codTipoInsumo)
   }
 }
