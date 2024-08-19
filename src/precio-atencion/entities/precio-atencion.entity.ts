@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
+import { Atencion } from "src/atencion/entities/atencion.entity";
+import { Column, Entity, OneToMany, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 
@@ -14,4 +15,6 @@ export class PrecioAtencion {
   @Column()
   valor: number;
 
+  @OneToMany(() => Atencion, (atenciones) => atenciones.precioAtencion)
+  atenciones: Atencion[]
 }

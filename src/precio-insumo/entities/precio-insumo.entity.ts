@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Insumo } from "src/insumo/entities/insumo.entity";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 
@@ -17,4 +18,7 @@ export class PrecioInsumo {
 
   @Column()
   valorVenta: number;
+
+  @ManyToOne(() => Insumo, (insumo) => insumo.preciosInsumo)
+  insumo: Insumo;
 }

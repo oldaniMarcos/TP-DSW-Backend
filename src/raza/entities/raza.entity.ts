@@ -1,7 +1,7 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Especie } from "src/especie/entities/especie.entity";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
-
 export class Raza {
 
   @PrimaryGeneratedColumn()
@@ -9,4 +9,7 @@ export class Raza {
 
   @Column()
   descripcion: string;
+
+  @ManyToOne(() => Especie, (especie) => especie.razas)
+  especie: Especie
 }

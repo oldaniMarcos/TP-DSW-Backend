@@ -1,4 +1,7 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Atencion } from "src/atencion/entities/atencion.entity";
+import { Cliente } from "src/cliente/entities/cliente.entity";
+import { Raza } from "src/raza/entities/raza.entity";
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Animal {
@@ -15,4 +18,13 @@ export class Animal {
     @Column()
     edad: number;
 
+    @ManyToOne(() => Cliente, (cliente) => cliente.animales)
+    cliente: Cliente;
+
+    @OneToOne(() => Raza) // Relación uni-direccional (no aparece en Raza)
+    @JoinColumn()
+    raza: Raza;
+
+    @OneToMany(() => Atencion, (atenciones) => atenciones.animal)
+    atenciones: Atencion[]
 }

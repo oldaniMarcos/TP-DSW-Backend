@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Atencion } from "src/atencion/entities/atencion.entity";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 
@@ -24,4 +25,7 @@ export class Veterinario {
 
     @Column()
     email: string;
+
+    @OneToMany(() => Atencion, (atenciones) => atenciones.veterinario)
+    atenciones: Atencion[]
 }

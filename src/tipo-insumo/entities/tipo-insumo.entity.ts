@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Insumo } from "src/insumo/entities/insumo.entity";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 
@@ -9,4 +10,7 @@ export class TipoInsumo {
 
   @Column()
   descripcion: string;
+
+  @OneToMany(() => Insumo, (insumos) => insumos.tipoInsumo)
+  insumos: Insumo[]
 }

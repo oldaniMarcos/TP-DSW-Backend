@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Raza } from "src/raza/entities/raza.entity";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Especie {
@@ -9,5 +10,6 @@ export class Especie {
     @Column()
     descripcion: string;
 
-
+    @OneToMany(() => Raza, (razas) => razas.especie)
+    razas: Raza[]
 }
