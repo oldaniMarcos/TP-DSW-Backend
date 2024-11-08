@@ -15,7 +15,6 @@ export class PrecioInsumoService {
 
   create(createPrecioInsumoDto: CreatePrecioInsumoDto): Promise<PrecioInsumo> {
     const precioInsumo = new PrecioInsumo();
-    // precioInsumo.codInsumo = createPrecioInsumoDto.codInsumo;
     precioInsumo.fechaDesde = createPrecioInsumoDto.fechaDesde;
     precioInsumo.valor = createPrecioInsumoDto.valor;
     precioInsumo.valorVenta = createPrecioInsumoDto.valor;

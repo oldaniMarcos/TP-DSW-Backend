@@ -8,10 +8,6 @@ import {
 } from 'class-validator';
 
 export class UpdatePrecioInsumoDto extends PartialType(CreatePrecioInsumoDto) {
-  /*@IsNumber()
-  @IsNotEmpty()
-  @IsOptional()
-  codInsumo: number;*/
 
   @IsDateString()
   @IsNotEmpty()

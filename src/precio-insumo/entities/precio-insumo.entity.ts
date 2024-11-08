@@ -8,8 +8,6 @@ export class PrecioInsumo {
   @PrimaryGeneratedColumn()
   codPrecioInsumo: number;
 
-  // codInsumo: number;
-
   @Column()
   fechaDesde: string;
 

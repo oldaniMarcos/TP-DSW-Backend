@@ -6,8 +6,7 @@ import { Column, Entity, OneToMany, PrimaryColumn, PrimaryGeneratedColumn } from
 export class PrecioAtencion {
 
   @PrimaryGeneratedColumn()
-  idPrecioAtencion: number;
-  // idAtencion: number; //entidad debil
+idPrecioAtencion: number;
 
   @Column()
   fechaDesde: string;

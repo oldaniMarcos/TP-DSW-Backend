@@ -18,18 +18,18 @@ export class ClienteController {
     return this.clienteService.findAll();
   }
 
-  @Get(':dni')
-  findOne(@Param('dni', ParseIntPipe) dni: number): Promise<Cliente> {
-    return this.clienteService.findOne(dni);
+  @Get(':id')
+  findOne(@Param('id', ParseIntPipe) id: number): Promise<Cliente> {
+    return this.clienteService.findOne(id);
   }
 
-  @Patch(':dni')
-  update(@Param('dni', ParseIntPipe) dni: number, @Body() updateClienteDto: UpdateClienteDto): Promise<Cliente> {
-    return this.clienteService.update(dni, updateClienteDto);
+  @Patch(':id')
+  update(@Param('id', ParseIntPipe) id: number, @Body() updateClienteDto: UpdateClienteDto): Promise<Cliente> {
+    return this.clienteService.update(id, updateClienteDto);
   }
 
-  @Delete(':dni')
-  remove(@Param('dni', ParseIntPipe) dni: number): Promise<void> {
-    return this.clienteService.remove(dni);
+  @Delete(':id')
+  remove(@Param('id', ParseIntPipe) id: number): Promise<void> {
+    return this.clienteService.remove(id);
   }
 }

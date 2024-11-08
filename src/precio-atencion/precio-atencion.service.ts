@@ -16,7 +16,6 @@ export class PrecioAtencionService {
   create(createPrecioAtencionDto: CreatePrecioAtencionDto): Promise<PrecioAtencion> {
 
     const precioAtencion = new PrecioAtencion();
-    // precioAtencion.idAtencion = createPrecioAtencionDto.idAtencion;
     precioAtencion.fechaDesde = createPrecioAtencionDto.fechaDesde;
     precioAtencion.valor = createPrecioAtencionDto.valor;
 
