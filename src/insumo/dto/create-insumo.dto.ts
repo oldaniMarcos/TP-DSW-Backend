@@ -1,4 +1,4 @@
-import { IsDateString, IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsDateString, IsNotEmpty, IsNumber, IsObject, IsString } from 'class-validator';
 
 export class CreateInsumoDto {
   @IsString()
@@ -12,4 +12,9 @@ export class CreateInsumoDto {
   @IsDateString()
   @IsNotEmpty()
   fechaVencimiento: string;
+
+  @IsNumber()
+  @IsNotEmpty()
+  idTipoInsumo: number;
+  
 }

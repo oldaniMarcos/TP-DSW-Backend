@@ -1,6 +1,6 @@
 import { PartialType } from '@nestjs/mapped-types';
 import { CreateInsumoDto } from './create-insumo.dto';
-import { IsDateString, IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsDateString, IsNotEmpty, IsNumber, IsObject, IsString } from 'class-validator';
 
 export class UpdateInsumoDto extends PartialType(CreateInsumoDto) {
   @IsString()
@@ -14,4 +14,8 @@ export class UpdateInsumoDto extends PartialType(CreateInsumoDto) {
   @IsDateString()
   @IsNotEmpty()
   fechaVencimiento?: string;
+
+  @IsNumber()
+  @IsNotEmpty()
+  idTipoInsumo: number;
 }
