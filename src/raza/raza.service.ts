@@ -4,23 +4,35 @@ import { UpdateRazaDto } from './dto/update-raza.dto';
 import { Raza } from './entities/raza.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { Especie } from 'src/especie/entities/especie.entity';
 
 @Injectable()
 export class RazaService {
 
   constructor(
     @InjectRepository(Raza)
-    private readonly razaRepository: Repository<Raza>
+    private readonly razaRepository: Repository<Raza>,
+    @InjectRepository(Especie)
+    private readonly especieRepository: Repository<Especie>
   ) {}
 
-  create(createRazaDto: CreateRazaDto): Promise<Raza> {
-    const raza = new Raza();
-    raza.descripcion = createRazaDto.descripcion;
-    return this.razaRepository.save(raza);
+  async create(createRazaDto: CreateRazaDto): Promise<Raza> {
+    const { descripcion, idEspecie } = createRazaDto;
+    const especie = await this.especieRepository.findOneBy({ codEspecie: idEspecie });
+
+    if(!especie) throw new Error("Especie no encontrada")
+  
+    const raza = this.razaRepository.create({
+      descripcion,
+      especie
+    });
+
+    return this.razaRepository.save(raza)
+    
   }
 
   async findAll(): Promise<Raza[]> {
-    return this.razaRepository.find();
+    return this.razaRepository.find({relations: ["especie"]});
   }
 
   findOne(codRaza: number): Promise<Raza> {
@@ -28,8 +40,25 @@ export class RazaService {
   }
 
   async update(codRaza: number, updateRazaDto: UpdateRazaDto): Promise<Raza> {
-    await this.razaRepository.update(codRaza, updateRazaDto)
-    return this.razaRepository.findOneBy({codRaza});
+    const { idEspecie, ...updateFields} = updateRazaDto
+
+    const raza = await this.razaRepository.findOneBy({ codRaza })
+    if(!raza) {
+      throw new Error('Raza no encontrada')
+    }
+
+    if (idEspecie) {
+      const especie = await this.especieRepository.findOneBy({ codEspecie: idEspecie });
+      if (!especie) {
+        throw new Error('Especie no fue encontrada');
+      }
+      raza.especie = especie;
+    }
+
+    // actualiza el resto de los campos
+    Object.assign(raza, updateFields);
+
+    return this.razaRepository.save(raza);
   }
 
   async remove(codRaza: number): Promise<void> {
