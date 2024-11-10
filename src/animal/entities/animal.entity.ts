@@ -21,8 +21,8 @@ export class Animal {
     @ManyToOne(() => Cliente, (cliente) => cliente.animales)
     cliente: Cliente;
 
-    @OneToOne(() => Raza) // Relación uni-direccional (no aparece en Raza)
-    @JoinColumn()
+    @ManyToOne(() => Raza, (raza) => raza.animales ) 
+    //@JoinColumn()
     raza: Raza;
 
     @OneToMany(() => Atencion, (atenciones) => atenciones.animal)
