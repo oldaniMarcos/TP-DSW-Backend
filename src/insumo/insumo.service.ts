@@ -26,19 +26,19 @@ export class InsumoService {
 
     return this.insumoRepository.save(insumo);*/
 
-  const { descripcion, stock, fechaVencimiento, idTipoInsumo } = createInsumoDto;
-  const tipoInsumo = await this.tipoInsumoRepository.findOneBy({ codTipoInsumo: idTipoInsumo });
+    const { descripcion, stock, fechaVencimiento, idTipoInsumo } = createInsumoDto;
+    const tipoInsumo = await this.tipoInsumoRepository.findOneBy({ codTipoInsumo: idTipoInsumo });
 
-  if(!tipoInsumo) throw new Error("TipoInsumo no encontrado")
-  
-  const insumo = this.insumoRepository.create({
-    descripcion,
-    stock,
-    fechaVencimiento,
-    tipoInsumo
-  });
-  
-  return this.insumoRepository.save(insumo);
+    if(!tipoInsumo) throw new Error("TipoInsumo no encontrado")
+    
+    const insumo = this.insumoRepository.create({
+      descripcion,
+      stock,
+      fechaVencimiento,
+      tipoInsumo
+    });
+    
+    return this.insumoRepository.save(insumo);
 
   }
 

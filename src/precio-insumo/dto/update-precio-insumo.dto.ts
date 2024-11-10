@@ -23,4 +23,8 @@ export class UpdatePrecioInsumoDto extends PartialType(CreatePrecioInsumoDto) {
   @IsNotEmpty()
   @IsOptional()
   valorVenta?: number;
+
+  @IsNumber()
+  @IsNotEmpty()
+  idInsumo: number;
 }

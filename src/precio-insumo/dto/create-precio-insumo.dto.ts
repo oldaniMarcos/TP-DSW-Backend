@@ -13,4 +13,8 @@ export class CreatePrecioInsumoDto {
   @IsNumber()
   @IsNotEmpty()
   valorVenta: number;
+
+  @IsNumber()
+  @IsNotEmpty()
+  idInsumo: number;
 }
