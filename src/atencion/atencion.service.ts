@@ -4,27 +4,54 @@ import { UpdateAtencionDto } from './dto/update-atencion.dto';
 import { Atencion } from './entities/atencion.entity.js';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { Animal } from 'src/animal/entities/animal.entity';
+import { PrecioAtencion } from 'src/precio-atencion/entities/precio-atencion.entity';
+import { Veterinario } from 'src/veterinario/entities/veterinario.entity';
+import { Insumo } from 'src/insumo/entities/insumo.entity';
 
 @Injectable()
 export class AtencionService {
 
   constructor(
     @InjectRepository(Atencion)
-    private readonly atencionRepository: Repository<Atencion>
+    private readonly atencionRepository: Repository<Atencion>,
+    @InjectRepository(Animal)
+    private readonly animalRepository: Repository<Animal>,
+    @InjectRepository(PrecioAtencion)
+    private readonly precioAtencionRepository: Repository<PrecioAtencion>,
+    @InjectRepository(Veterinario)
+    private readonly veterinarioRepository: Repository<Veterinario>,
+    @InjectRepository(Insumo)
+    private readonly insumoRepository: Repository<Insumo>
   ) { }
 
-  create(createAtencionDto: CreateAtencionDto): Promise<Atencion> {
+  async create(createAtencionDto: CreateAtencionDto): Promise<Atencion> {
 
-    const atencion = new Atencion();
-    atencion.fechaHora = createAtencionDto.fechaHora;
-    atencion.resultado = createAtencionDto.resultado;
-    atencion.observaciones = createAtencionDto.observaciones;
+    const {idAnimal, idPrecio, idVeterinario, idsInsumos, fechaHora, resultado, observaciones} = createAtencionDto
+    const animal = await this.animalRepository.findOneBy({nroHistClinica:idAnimal})
+    const precioAtencion = await this.precioAtencionRepository.findOneBy({idPrecioAtencion:idPrecio})
+    const veterinario = await this.veterinarioRepository.findOneBy({idVeterinario:idVeterinario})
 
+    if (!animal || !precioAtencion || !veterinario) {
+      throw new Error("Alguna entidad relacionada no fue encontrada")
+    }
+
+    const insumos = await this.insumoRepository.findByIds(idsInsumos)
+    const atencion = this.atencionRepository.create({
+      fechaHora,
+      resultado,
+      observaciones,
+      animal,
+      precioAtencion,
+      veterinario, 
+      insumos
+    })
+    
     return this.atencionRepository.save(atencion);
   }
 
   async findAll(): Promise<Atencion[]> {
-    return this.atencionRepository.find();
+    return this.atencionRepository.find({relations:['animal','precioAtencion', 'veterinario', 'insumos']});
   }
 
   findOne(idAtencion: number): Promise<Atencion> {
@@ -32,8 +59,44 @@ export class AtencionService {
   }
 
   async update(idAtencion: number, updateAtencionDto: UpdateAtencionDto): Promise<Atencion> {
-    await this.atencionRepository.update(idAtencion, updateAtencionDto);
-    return this.atencionRepository.findOneBy({ idAtencion })
+    const { idAnimal, idPrecio, idVeterinario, idsInsumos, ...updateFields } = updateAtencionDto;
+
+  const atencion = await this.atencionRepository.findOne({
+    where: { idAtencion },
+    relations: ['animal', 'precioAtencion', 'veterinario', 'insumos'],
+    });
+  
+  if (!atencion) {
+    throw new Error('Atencion no encontrada');
+    }
+
+  if (idAnimal) {
+    const animal = await this.animalRepository.findOneBy({nroHistClinica:idAnimal});
+    if (!animal) throw new Error('Animal no encontrado');
+    atencion.animal = animal;
+    }
+
+  if (idPrecio) {
+    const precioAtencion = await this.precioAtencionRepository.findOneBy({idPrecioAtencion:idPrecio});
+    if (!precioAtencion) throw new Error('PrecioAtencion no encontrado');
+    atencion.precioAtencion = precioAtencion;
+    }
+
+  if (idVeterinario) {
+    const veterinario = await this.veterinarioRepository.findOneBy({idVeterinario:idVeterinario});
+    if (!veterinario) throw new Error('Veterinario no encontrado');
+    atencion.veterinario = veterinario;
+  }
+
+  if (idsInsumos) {
+    const insumos = await this.insumoRepository.findByIds(idsInsumos);
+    if (insumos.length !== idsInsumos.length) throw new Error('Algunas IDs de Insumos no fueron encontradas');
+    atencion.insumos = insumos;
+  }
+
+  Object.assign(atencion, updateFields);
+
+  return this.atencionRepository.save(atencion);
   }
 
   async remove(idAtencion: number): Promise<void> {

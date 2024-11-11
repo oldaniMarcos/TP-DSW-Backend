@@ -1,6 +1,6 @@
 import { PartialType } from '@nestjs/mapped-types';
 import { CreateAtencionDto } from './create-atencion.dto';
-import { IsDateString, IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { IsDateString, IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class UpdateAtencionDto extends PartialType(CreateAtencionDto) {
 
@@ -16,5 +16,21 @@ export class UpdateAtencionDto extends PartialType(CreateAtencionDto) {
   @IsOptional()
   @IsString()
   observaciones?: string;
+
+  @IsNumber()
+  @IsNotEmpty()
+  idAnimal: number;
+
+  @IsNumber()
+  @IsNotEmpty()
+  idPrecio: number;
+
+  @IsNumber()
+  @IsNotEmpty()
+  idVeterinario: number;
+
+  @IsNumber()
+  @IsNotEmpty()
+  idsInsumos: number[];
 
 }

@@ -1,4 +1,4 @@
-import { IsDateString, IsNotEmpty, IsOptional, IsString } from "class-validator";
+import { IsDateString, IsNotEmpty, IsNumber, IsOptional, IsString } from "class-validator";
 
 export class CreateAtencionDto {
 
@@ -11,7 +11,22 @@ export class CreateAtencionDto {
   resultado: string;
 
   @IsString()
-  @IsOptional()             //observacion es opcional
+  @IsNotEmpty()             
   observaciones?: string;
 
+  @IsNumber()
+  @IsNotEmpty()
+  idAnimal: number;
+
+  @IsNumber()
+  @IsNotEmpty()
+  idPrecio: number;
+
+  @IsNumber()
+  @IsNotEmpty()
+  idVeterinario: number;
+
+  @IsNumber()
+  @IsNotEmpty()
+  idsInsumos: number[];
 }
