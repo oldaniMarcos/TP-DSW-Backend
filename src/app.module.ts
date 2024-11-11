@@ -22,6 +22,8 @@ import { PrecioInsumo } from './precio-insumo/entities/precio-insumo.entity.js';
 import { Raza } from './raza/entities/raza.entity.js';
 import { TipoInsumo } from './tipo-insumo/entities/tipo-insumo.entity.js';
 import { Veterinario } from './veterinario/entities/veterinario.entity.js';
+import { AdminModule } from './admin/admin.module';
+import { Admin } from './admin/entities/admin.entity.js';
 
 @Module({
   imports: [
@@ -32,7 +34,7 @@ import { Veterinario } from './veterinario/entities/veterinario.entity.js';
       username: 'root',
       password: 'root',
       database: 'veterinaria_dsw',
-      entities: [Animal, Atencion, Cliente, Especie, Insumo, 
+      entities: [Admin ,Animal, Atencion, Cliente, Especie, Insumo, 
         PrecioAtencion, PrecioInsumo, Raza, TipoInsumo, Veterinario],
       synchronize: true,
     }),
@@ -44,7 +46,8 @@ import { Veterinario } from './veterinario/entities/veterinario.entity.js';
     AtencionModule,
     PrecioAtencionModule,
     TipoInsumoModule,
-    PrecioInsumoModule
+    PrecioInsumoModule,
+    AdminModule
   ],
   controllers: [AppController],
   providers: [AppService],
