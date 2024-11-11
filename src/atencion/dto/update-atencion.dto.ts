@@ -1,6 +1,6 @@
 import { PartialType } from '@nestjs/mapped-types';
 import { CreateAtencionDto } from './create-atencion.dto';
-import { IsDateString, IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
+import { IsArray, IsDateString, IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class UpdateAtencionDto extends PartialType(CreateAtencionDto) {
 
@@ -29,7 +29,7 @@ export class UpdateAtencionDto extends PartialType(CreateAtencionDto) {
   @IsNotEmpty()
   idVeterinario: number;
 
-  @IsNumber()
+  @IsArray()
   @IsNotEmpty()
   idsInsumos: number[];
 

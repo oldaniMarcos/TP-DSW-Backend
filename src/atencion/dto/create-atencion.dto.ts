@@ -1,4 +1,4 @@
-import { IsDateString, IsNotEmpty, IsNumber, IsOptional, IsString } from "class-validator";
+import { IsArray, IsDateString, IsNotEmpty, IsNumber, IsOptional, IsString } from "class-validator";
 
 export class CreateAtencionDto {
 
@@ -26,7 +26,7 @@ export class CreateAtencionDto {
   @IsNotEmpty()
   idVeterinario: number;
 
-  @IsNumber()
+  @IsArray()
   @IsNotEmpty()
   idsInsumos: number[];
 }
