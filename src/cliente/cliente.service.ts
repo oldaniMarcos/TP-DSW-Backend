@@ -21,6 +21,7 @@ export class ClienteService {
     cliente.nombreYApellido = createClienteDto.nombreYApellido;
     cliente.telefono = createClienteDto.telefono;
     cliente.direccion = createClienteDto.direccion;
+    cliente.rol = createClienteDto.rol //<---
     cliente.email = createClienteDto.email;
     cliente.usuario = createClienteDto.usuario;
 

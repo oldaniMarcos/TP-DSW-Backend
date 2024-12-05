@@ -23,6 +23,9 @@ export class Cliente {
   email: string;
 
   @Column()
+  rol: 'cliente' | 'admin';
+
+  @Column()
   usuario: string;
 
   @Column()
