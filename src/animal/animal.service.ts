@@ -76,4 +76,9 @@ export class AnimalService {
   async remove(nroHistClinica: number): Promise<void> {
     await this.animalRepository.delete(nroHistClinica)
   }
+
+  async findByClienteId(clienteId: number): Promise<Animal[]> {
+    return this.animalRepository.find({ where: { cliente: { id: clienteId } } });
+  }
 }
+

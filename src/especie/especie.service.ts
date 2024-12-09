@@ -4,6 +4,7 @@ import { UpdateEspecieDto } from './dto/update-especie.dto';
 import { Especie } from './entities/especie.entity.js';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { Raza } from 'src/raza/entities/raza.entity';
 
 @Injectable()
 export class EspecieService {
@@ -35,5 +36,18 @@ export class EspecieService {
 
   async remove(codEspecie: number): Promise<void> {
     await this.especieRepository.delete(codEspecie)
+  }
+
+  async findRazasByEspecieId(codEspecie: number): Promise<Raza[]> {
+    const especie = await this.especieRepository.findOne({
+      where: { codEspecie },
+      relations: ['razas'], // Asegúrate de incluir la relación con razas
+    });
+
+    if (!especie) {
+      throw new NotFoundException('Especie no encontrada');
+    }
+
+    return especie.razas; // Devuelve las razas asociadas a la especie
   }
 }

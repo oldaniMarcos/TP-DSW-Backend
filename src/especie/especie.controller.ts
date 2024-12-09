@@ -3,6 +3,7 @@ import { EspecieService } from './especie.service';
 import { CreateEspecieDto } from './dto/create-especie.dto';
 import { UpdateEspecieDto } from './dto/update-especie.dto';
 import { Especie } from './entities/especie.entity.js';
+import { Raza } from 'src/raza/entities/raza.entity';
 
 @Controller('especie')
 export class EspecieController {
@@ -32,5 +33,10 @@ export class EspecieController {
   @Delete(':codEspecie')
   remove(@Param('codEspecie', ParseIntPipe) codEspecie: number): Promise<void> {
     return this.especieService.remove(codEspecie);
+  }
+
+  @Get(':codEspecie/razas')
+  findRazasByEspecieId(@Param('codEspecie', ParseIntPipe) codEspecie: number): Promise<Raza[]> {
+    return this.especieService.findRazasByEspecieId(codEspecie);
   }
 }

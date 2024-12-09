@@ -34,4 +34,9 @@ export class AnimalController {
   remove(@Param('nroHistClinica') nroHistClinica: number): Promise<void> {
     return this.animalService.remove(nroHistClinica);
   }
+
+  @Get('cliente/:clienteId')
+  findByClienteId(@Param('clienteId') clienteId: number): Promise<Animal[]> {
+  return this.animalService.findByClienteId(clienteId);
+}
 }
