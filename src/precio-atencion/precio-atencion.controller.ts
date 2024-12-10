@@ -33,4 +33,9 @@ export class PrecioAtencionController {
   remove(@Param('idPrecioAtencion', ParseIntPipe) idPrecioAtencion: number): Promise<void> {
     return this.precioAtencionService.remove(idPrecioAtencion);
   }
+
+  @Get('list/recent')
+  findMostRecent(): Promise<PrecioAtencion> {
+    return this.precioAtencionService.findMostRecent();
+  }
 }

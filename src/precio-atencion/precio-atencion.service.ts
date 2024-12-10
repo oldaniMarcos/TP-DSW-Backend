@@ -40,4 +40,18 @@ export class PrecioAtencionService {
     await this.precioAtencionRepository.delete(idPrecioAtencion)
 
   }
+
+  async findMostRecent(): Promise<PrecioAtencion> {
+    const [recent] = await this.precioAtencionRepository.find({
+      order: {
+        fechaDesde: "DESC"
+      },
+      take: 1
+    });
+
+    if (!recent) {
+      throw new NotFoundException('No existen precios de atenciones')
+    }
+    return recent
+  }
 }
