@@ -32,4 +32,9 @@ export class AtencionController {
   remove(@Param('idAtencion', ParseIntPipe) idAtencion: number): Promise<void> {
     return this.atencionService.remove(idAtencion);
   }
+
+  @Get('cliente/:clienteId')
+  findByClienteId(@Param('clienteId') clienteId: number): Promise<Atencion[]> {
+  return this.atencionService.findByClienteId(+clienteId);
+}
 }

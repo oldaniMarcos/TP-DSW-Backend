@@ -102,4 +102,11 @@ export class AtencionService {
   async remove(idAtencion: number): Promise<void> {
     await this.atencionRepository.delete(idAtencion)
   }
+
+  async findByClienteId(clienteId: number): Promise<Atencion[]> {
+    return this.atencionRepository.find({
+      relations: ['animal', 'animal.cliente', 'precioAtencion'],
+      where: { animal: { cliente: { id: clienteId } } },
+    });
+  }
 }
