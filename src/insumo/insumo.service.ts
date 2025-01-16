@@ -61,7 +61,7 @@ export class InsumoService {
 
     const insumo = await this.insumoRepository.findOneBy({ codInsumo });
     if (!insumo) {
-      throw new Error('Insumo not found');
+      throw new Error('Insumo no encontrado');
     }
 
     // actualiza la relacion si se provee un tipo insumo
@@ -81,5 +81,19 @@ export class InsumoService {
 
   async remove(codInsumo: number): Promise<void> {
     await this.insumoRepository.delete(codInsumo)
+  }
+
+  async decreaseStock(codInsumo: number, cantidad: number): Promise<Insumo> {
+    const insumo = await this.insumoRepository.findOneBy({ codInsumo });
+    if (!insumo) {
+      throw new Error(`Insumo no encontrado`);
+    }
+
+    if (insumo.stock < cantidad) {
+      throw new Error(`Stock insuficiente para el insumo ${codInsumo}. Disponible: ${insumo.stock}, Pedido: ${cantidad}`);
+    }
+
+    insumo.stock -= cantidad;
+    return this.insumoRepository.save(insumo);
   }
 }

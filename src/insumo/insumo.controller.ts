@@ -44,4 +44,12 @@ export class InsumoController {
   remove(@Param('codInsumo', ParseIntPipe) codInsumo: number): Promise<void> {
     return this.insumoService.remove(codInsumo);
   }
+
+  @Patch(':codInsumo/decrease-stock')
+  async decreaseStock(
+    @Param('codInsumo', ParseIntPipe) codInsumo: number,
+    @Body('cantidad') cantidad: number,
+  ): Promise<Insumo> {
+    return this.insumoService.decreaseStock(codInsumo, cantidad);
+  }
 }
