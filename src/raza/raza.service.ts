@@ -61,6 +61,19 @@ export class RazaService {
     return this.razaRepository.save(raza);
   }
 
+  async findEspecie(codRaza: number): Promise<Especie> {
+    const raza = await this.razaRepository.findOne({
+      where: { codRaza },
+      relations: ['especie'],
+    });
+  
+    if (!raza) {
+      throw new Error('Raza not found');
+    }
+  
+    return raza.especie;
+  }
+
   async remove(codRaza: number): Promise<void> {
     await this.razaRepository.delete(codRaza)
   }

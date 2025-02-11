@@ -12,6 +12,7 @@ import { RazaService } from './raza.service';
 import { CreateRazaDto } from './dto/create-raza.dto';
 import { UpdateRazaDto } from './dto/update-raza.dto';
 import { Raza } from './entities/raza.entity';
+import { Especie } from 'src/especie/entities/especie.entity.js';
 
 @Controller('raza')
 export class RazaController {
@@ -36,6 +37,11 @@ export class RazaController {
   update(@Param('codRaza', ParseIntPipe) codRaza: number, 
   @Body() updateRazaDto: UpdateRazaDto): Promise<Raza> {
     return this.razaService.update(codRaza, updateRazaDto);
+  }
+
+  @Get(':codRaza/especie')
+  findEspecie(@Param('codRaza', ParseIntPipe) codRaza: number): Promise<Especie> {
+    return this.razaService.findEspecie(codRaza);
   }
 
   @Delete(':codRaza')
