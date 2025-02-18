@@ -68,7 +68,7 @@ export class RazaService {
     });
   
     if (!raza) {
-      throw new Error('Raza not found');
+      throw new Error('Raza no encontrada');
     }
   
     return raza.especie;

@@ -96,4 +96,17 @@ export class InsumoService {
     insumo.stock -= cantidad;
     return this.insumoRepository.save(insumo);
   }
+
+  async findTipoInsumo(codInsumo: number): Promise<TipoInsumo> {
+      const insumo = await this.insumoRepository.findOne({
+        where: { codInsumo },
+        relations: ['tipoInsumo'],
+      });
+    
+      if (!insumo) {
+        throw new Error('Insumo no encontrado');
+      }
+    
+      return insumo.tipoInsumo;
+    }
 }

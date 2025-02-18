@@ -12,6 +12,7 @@ import { InsumoService } from './insumo.service';
 import { CreateInsumoDto } from './dto/create-insumo.dto';
 import { UpdateInsumoDto } from './dto/update-insumo.dto';
 import { Insumo } from './entities/insumo.entity';
+import { TipoInsumo } from 'src/tipo-insumo/entities/tipo-insumo.entity.js';
 
 @Controller('insumo')
 export class InsumoController {
@@ -51,5 +52,10 @@ export class InsumoController {
     @Body('cantidad') cantidad: number,
   ): Promise<Insumo> {
     return this.insumoService.decreaseStock(codInsumo, cantidad);
+  }
+
+  @Get(':codInsumo/tipo-insumo')
+    findEspecie(@Param('codInsumo', ParseIntPipe) codInsumo: number): Promise<TipoInsumo> {
+      return this.insumoService.findTipoInsumo(codInsumo);
   }
 }
