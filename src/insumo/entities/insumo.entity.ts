@@ -20,7 +20,7 @@ export class Insumo {
   @ManyToOne(() => TipoInsumo, (tipoInsumo) => tipoInsumo.insumos)
   tipoInsumo: TipoInsumo;
 
-  @OneToMany(() => PrecioInsumo, (preciosInsumo) => preciosInsumo.insumo)
+  @OneToMany(() => PrecioInsumo, (preciosInsumo) => preciosInsumo.insumo, {cascade: true})
   preciosInsumo: PrecioInsumo[]
 }
 

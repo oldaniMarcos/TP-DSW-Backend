@@ -1,5 +1,5 @@
 import { Insumo } from "src/insumo/entities/insumo.entity";
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 
@@ -17,6 +17,7 @@ export class PrecioInsumo {
   @Column()
   valorVenta: number;
 
-  @ManyToOne(() => Insumo, (insumo) => insumo.preciosInsumo)
+  @ManyToOne(() => Insumo, (insumo) => insumo.preciosInsumo, { onDelete: 'CASCADE' })
+  @JoinColumn({ name: 'codInsumo' })
   insumo: Insumo;
 }
