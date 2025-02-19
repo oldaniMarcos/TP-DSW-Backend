@@ -67,4 +67,19 @@ export class PrecioInsumoService {
   async remove(codPrecioInsumo: number): Promise<void> {
     await this.precioInsumoRepository.delete(codPrecioInsumo)
   }
+
+  async findMostRecentByInsumo(idInsumo: number): Promise<PrecioInsumo> {
+      const recent = await this.precioInsumoRepository.findOne({
+        where: { insumo: { codInsumo: idInsumo } },
+        order: {
+          fechaDesde: "DESC"
+        },
+        relations: ['insumo'],
+      });
+  
+      if (!recent) {
+        throw new NotFoundException(`No existen precios de insumos para el insumo con ID ${idInsumo}`);
+      }
+      return recent
+    }
 }

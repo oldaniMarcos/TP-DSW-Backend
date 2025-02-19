@@ -42,4 +42,9 @@ export class PrecioInsumoController {
   remove(@Param('codPrecioInsumo', ParseIntPipe) codPrecioInsumo: number):Promise<void> {
     return this.precioInsumoService.remove(codPrecioInsumo);
   }
+
+  @Get('recent/:idInsumo')
+  findMostRecentByInsumo(@Param('idInsumo', ParseIntPipe) idInsumo: number): Promise<PrecioInsumo> {
+    return this.precioInsumoService.findMostRecentByInsumo(idInsumo);
+  }
 }
