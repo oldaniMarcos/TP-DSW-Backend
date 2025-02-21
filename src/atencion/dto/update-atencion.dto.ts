@@ -18,6 +18,10 @@ export class UpdateAtencionDto extends PartialType(CreateAtencionDto) {
   observaciones?: string;
 
   @IsNumber()
+  @IsOptional()          
+  valor?: number;
+
+  @IsNumber()
   @IsNotEmpty()
   idAnimal: number;
 

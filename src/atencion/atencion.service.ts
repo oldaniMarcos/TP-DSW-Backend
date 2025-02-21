@@ -27,7 +27,7 @@ export class AtencionService {
 
   async create(createAtencionDto: CreateAtencionDto): Promise<Atencion> {
 
-    const {idAnimal, idPrecio, idVeterinario, idsInsumos, fechaHora, resultado, observaciones} = createAtencionDto
+    const {idAnimal, idPrecio, idVeterinario, idsInsumos, fechaHora, resultado, observaciones, valor} = createAtencionDto
     const animal = await this.animalRepository.findOneBy({nroHistClinica:idAnimal})
     const precioAtencion = await this.precioAtencionRepository.findOneBy({idPrecioAtencion:idPrecio})
     const veterinario = await this.veterinarioRepository.findOneBy({idVeterinario:idVeterinario})
@@ -41,6 +41,7 @@ export class AtencionService {
       fechaHora,
       resultado,
       observaciones,
+      valor,
       animal,
       precioAtencion,
       veterinario, 

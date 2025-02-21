@@ -19,6 +19,9 @@ export class Atencion {
   @Column()
   observaciones: string;
 
+  @Column()
+  valor: number;
+
   @ManyToOne(() => Animal, (animal) => animal.atenciones)
   animal: Animal;
 

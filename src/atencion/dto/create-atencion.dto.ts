@@ -1,4 +1,4 @@
-import { IsArray, IsDateString, IsNotEmpty, IsNumber, IsOptional, IsString } from "class-validator";
+import { IsArray, IsDateString, IsNotEmpty, isNumber, IsNumber, IsOptional, IsString } from "class-validator";
 
 export class CreateAtencionDto {
 
@@ -13,6 +13,10 @@ export class CreateAtencionDto {
   @IsString()
   @IsNotEmpty()             
   observaciones?: string;
+
+  @IsNumber()
+  @IsNotEmpty()             
+  valor?: number;
 
   @IsNumber()
   @IsNotEmpty()
