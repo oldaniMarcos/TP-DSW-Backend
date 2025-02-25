@@ -21,7 +21,7 @@ export class AnimalService {
 
   async create(createAnimalDto: CreateAnimalDto): Promise<Animal> {
 
-    const { nombre, fechaNac, edad, idCliente, idRaza} = createAnimalDto
+    const { nombre, fechaNac, idCliente, idRaza} = createAnimalDto
 
     const cliente = await this.clienteRepository.findOneBy({ id: idCliente })
     if(!cliente) throw new Error('Cliente no encontrado')
@@ -32,7 +32,6 @@ export class AnimalService {
     const animal = this.animalRepository.create({
       nombre,
       fechaNac,
-      edad,
       cliente,
       raza
     })

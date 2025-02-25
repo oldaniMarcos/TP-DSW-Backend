@@ -13,10 +13,6 @@ export class UpdateAnimalDto extends PartialType(CreateAnimalDto) {
     fechaNac?: string;
 
     @IsNumber()
-    @IsOptional()
-    edad?: number;
-
-    @IsNumber()
     @IsNotEmpty()
     idCliente: number;
 

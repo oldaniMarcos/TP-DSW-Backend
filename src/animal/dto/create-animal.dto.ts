@@ -12,10 +12,6 @@ export class CreateAnimalDto {
 
     @IsNumber()
     @IsNotEmpty()
-    edad: number;
-
-    @IsNumber()
-    @IsNotEmpty()
     idCliente: number;
 
     @IsNumber()

@@ -15,9 +15,6 @@ export class Animal {
     @Column()
     fechaNac: string;
 
-    @Column()
-    edad: number;
-
     @ManyToOne(() => Cliente, (cliente) => cliente.animales)
     cliente: Cliente;
 
