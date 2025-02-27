@@ -106,7 +106,7 @@ export class AtencionService {
 
   async findByClienteId(clienteId: number): Promise<Atencion[]> {
     return this.atencionRepository.find({
-      relations: ['animal', 'animal.cliente', 'precioAtencion'],
+      relations: ['animal', 'animal.cliente', 'precioAtencion', 'veterinario', 'insumos'],
       where: { animal: { cliente: { id: clienteId } } },
     });
   }
