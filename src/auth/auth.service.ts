@@ -4,8 +4,25 @@ import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 
 type AuthInput = { usuario: string; password: string}
-type SignInData = { idCliente: number; usuario: string}
-type AuthResult = { token: string; idCliente: number; usuario: string}
+type SignInData = { 
+    id: number;
+    usuario: string;
+    nombreYApellido: string;
+    dni: string;
+    email: string;
+    rol: string;
+}
+type AuthResult = { 
+    token: string;
+    user: {
+        id: number;
+        usuario: string;
+        nombreYApellido: string;
+        dni: string;
+        email: string;
+        rol: string;
+    }
+}
 
 
 @Injectable()
@@ -30,27 +47,38 @@ export class AuthService {
       
         const isPasswordValid = await bcrypt.compare(input.password, usuario.password);
         if (!isPasswordValid) {
-        throw new UnauthorizedException('Datos de login invalidos');
+        throw new UnauthorizedException('Contraseña incorrecta');
         }
 
         return {
-            idCliente: usuario.id,
-            usuario: usuario.usuario
+            id: usuario.id,
+            usuario: usuario.usuario,
+            nombreYApellido: usuario.nombreYApellido,
+            dni: usuario.dni,
+            email: usuario.email,
+            rol: usuario.rol,
         }
     }
 
     async signIn(usuario: SignInData): Promise<AuthResult> {
         const payload = {
-            sub: usuario.idCliente,
+            sub: usuario.id,
             usuario: usuario.usuario,
+            rol: usuario.rol
         }
 
         const token = await this.jwtService.signAsync(payload)
 
         return {
             token,
-            usuario: usuario.usuario,
-            idCliente: usuario.idCliente,
+            user: {
+                id: usuario.id,
+                usuario: usuario.usuario,
+                nombreYApellido: usuario.nombreYApellido,
+                dni: usuario.dni,
+                email: usuario.email,
+                rol: usuario.rol,
+            }
         }
     }
 }

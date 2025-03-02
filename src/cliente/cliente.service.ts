@@ -54,20 +54,6 @@ export class ClienteService {
     await this.clienteRepository.delete(id)
   }
 
-  async login(usuario: string, password: string): Promise<Cliente> {
-    const cliente = await this.clienteRepository.findOneBy({ usuario });
-    if (!cliente) {
-      throw new NotFoundException('Cliente no encontrado');
-    }
-
-    const isPasswordValid = await bcrypt.compare(password, cliente.password);
-    if (!isPasswordValid) {
-      throw new UnauthorizedException('Datos de login invalidos');
-    }
-
-    return cliente;
-  }
-
   async findByUsuario(usuario: string): Promise<Cliente | undefined> {
     return this.clienteRepository.findOneBy({ usuario })
   }

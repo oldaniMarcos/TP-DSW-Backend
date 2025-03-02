@@ -34,9 +34,4 @@ export class ClienteController {
   remove(@Param('id', ParseIntPipe) id: number): Promise<void> {
     return this.clienteService.remove(id);
   }
-
-  @Post('login')
-  async login(@Body() loginDto: { usuario: string; password: string }): Promise<Cliente> {
-    return this.clienteService.login(loginDto.usuario, loginDto.password);
-  }
 }
