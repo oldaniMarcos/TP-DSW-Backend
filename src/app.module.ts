@@ -22,6 +22,7 @@ import { PrecioInsumo } from './precio-insumo/entities/precio-insumo.entity.js';
 import { Raza } from './raza/entities/raza.entity.js';
 import { TipoInsumo } from './tipo-insumo/entities/tipo-insumo.entity.js';
 import { Veterinario } from './veterinario/entities/veterinario.entity.js';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -45,6 +46,7 @@ import { Veterinario } from './veterinario/entities/veterinario.entity.js';
     PrecioAtencionModule,
     TipoInsumoModule,
     PrecioInsumoModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -1,8 +1,9 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe, UseGuards } from '@nestjs/common';
 import { ClienteService } from './cliente.service';
 import { CreateClienteDto } from './dto/create-cliente.dto';
 import { UpdateClienteDto } from './dto/update-cliente.dto';
 import { Cliente } from './entities/cliente.entity.js';
+import { AuthGuard } from 'src/auth/guards/auth/auth.guard';
 
 @Controller('cliente')
 export class ClienteController {
@@ -13,6 +14,7 @@ export class ClienteController {
     return this.clienteService.create(createClienteDto);
   }
 
+  // @UseGuards(AuthGuard)
   @Get()
   findAll(): Promise<Cliente[]> {
     return this.clienteService.findAll();

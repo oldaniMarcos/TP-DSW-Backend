@@ -67,4 +67,8 @@ export class ClienteService {
 
     return cliente;
   }
+
+  async findByUsuario(usuario: string): Promise<Cliente | undefined> {
+    return this.clienteRepository.findOneBy({ usuario })
+  }
 }
