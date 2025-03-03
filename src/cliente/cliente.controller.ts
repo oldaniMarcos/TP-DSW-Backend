@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe, UseGuards, Query } from '@nestjs/common';
 import { ClienteService } from './cliente.service';
 import { CreateClienteDto } from './dto/create-cliente.dto';
 import { UpdateClienteDto } from './dto/update-cliente.dto';
@@ -9,12 +9,12 @@ import { Public } from 'src/public/public.decorator';
 export class ClienteController {
   constructor(private readonly clienteService: ClienteService) { }
 
+  @Public()
   @Post()
   create(@Body() createClienteDto: CreateClienteDto): Promise<Cliente> {
     return this.clienteService.create(createClienteDto);
   }
 
-  @Public() // <-----------------------------
   @Get()
   findAll(): Promise<Cliente[]> {
     return this.clienteService.findAll();
@@ -34,4 +34,12 @@ export class ClienteController {
   remove(@Param('id', ParseIntPipe) id: number): Promise<void> {
     return this.clienteService.remove(id);
   }
+
+  @Public()
+  @Post('check')
+  async checkClienteExists( @Body() body: {dni: string, email: string, usuario: string})
+  {
+    return await this.clienteService.checkExistingFields(body.dni, body.email, body.usuario);
+  }
+
 }

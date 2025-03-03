@@ -57,4 +57,26 @@ export class ClienteService {
   async findByUsuario(usuario: string): Promise<Cliente | undefined> {
     return this.clienteRepository.findOneBy({ usuario })
   }
+
+  async checkExistingFields(dni: string, email: string, usuario: string) {
+
+    let existingDni = await this.clienteRepository.query(
+      'SELECT * FROM cliente WHERE dni = ?',
+      [dni]
+    )
+    let existingUsuario = await this.clienteRepository.query(
+      'SELECT * FROM cliente WHERE usuario = ?',
+      [usuario]
+    )
+    let existingEmail = await this.clienteRepository.query(
+      'SELECT * FROM cliente WHERE email = ?',
+      [email]
+    )   
+  
+    return { 
+      dni: existingDni.length > 0, 
+      email: existingEmail.length > 0, 
+      usuario: existingUsuario.length > 0 
+    };
+  }  
 }
