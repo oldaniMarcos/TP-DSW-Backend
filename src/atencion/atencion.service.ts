@@ -110,4 +110,27 @@ export class AtencionService {
       where: { animal: { cliente: { id: clienteId } } },
     });
   }
+
+  async hasAtencionWithAnimal(id: number): Promise<boolean> {
+    const count = await this.atencionRepository.count({
+      where: { animal: { nroHistClinica: id } }
+    });
+  
+    return count > 0;
+  }
+
+  async hasAtencionWithCliente(idCliente: number): Promise<boolean> {
+    return (await this.atencionRepository.count({
+      relations: ['animal', 'animal.cliente'],
+      where: { animal: { cliente: { id: idCliente } } }
+    })) > 0;
+  }
+
+  async hasAtencionWithVeterinario(id: number): Promise<boolean> {
+    const count = await this.atencionRepository.count({
+      where: { veterinario: { idVeterinario: id } }
+    });
+  
+    return count > 0;
+  }
 }

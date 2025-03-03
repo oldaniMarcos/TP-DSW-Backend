@@ -36,5 +36,23 @@ export class AtencionController {
   @Get('cliente/:clienteId')
   findByClienteId(@Param('clienteId') clienteId: number): Promise<Atencion[]> {
   return this.atencionService.findByClienteId(+clienteId);
+  }
+
+  @Get('exists/animal/:id')
+  async hasAtencionWithAnimal(@Param('id') idAnimal: number): Promise<{ exists: boolean }> {
+  const exists = await this.atencionService.hasAtencionWithAnimal(idAnimal);
+  return { exists };
+}
+
+  @Get('exists/animal/cliente/:id')
+  async hasAtencionWithCliente(@Param('id') idCliente: number): Promise<{ exists: boolean }> {
+  const exists = await this.atencionService.hasAtencionWithCliente(idCliente);
+  return { exists };
+  }
+
+  @Get('exists/veterinario/:id')
+  async hasAtencionWithVeterinario(@Param('id') idVeterinario: number): Promise<{ exists: boolean }> {
+  const exists = await this.atencionService.hasAtencionWithVeterinario(idVeterinario);
+  return { exists };
 }
 }
