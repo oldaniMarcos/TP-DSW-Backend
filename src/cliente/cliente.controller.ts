@@ -3,7 +3,7 @@ import { ClienteService } from './cliente.service';
 import { CreateClienteDto } from './dto/create-cliente.dto';
 import { UpdateClienteDto } from './dto/update-cliente.dto';
 import { Cliente } from './entities/cliente.entity.js';
-import { AuthGuard } from 'src/auth/guards/auth/auth.guard';
+import { Public } from 'src/public/public.decorator';
 
 @Controller('cliente')
 export class ClienteController {
@@ -14,7 +14,7 @@ export class ClienteController {
     return this.clienteService.create(createClienteDto);
   }
 
-  // @UseGuards(AuthGuard)
+  @Public() // <-----------------------------
   @Get()
   findAll(): Promise<Cliente[]> {
     return this.clienteService.findAll();
