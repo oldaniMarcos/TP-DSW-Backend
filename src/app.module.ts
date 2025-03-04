@@ -23,16 +23,24 @@ import { Raza } from './raza/entities/raza.entity.js';
 import { TipoInsumo } from './tipo-insumo/entities/tipo-insumo.entity.js';
 import { Veterinario } from './veterinario/entities/veterinario.entity.js';
 import { AuthModule } from './auth/auth.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot(),
     TypeOrmModule.forRoot({
+      // type: 'mysql',
+      // host: 'localhost',
+      // port: 3306,
+      // username: 'root',
+      // password: 'root',
+      // database: 'veterinaria_dsw',
       type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'root',
-      password: 'root',
-      database: 'veterinaria_dsw',
+      host: process.env.DB_HOST,
+      port: +process.env.DB_PORT,
+      username: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_NAME,
       entities: [Animal, Atencion, Cliente, Especie, Insumo, 
         PrecioAtencion, PrecioInsumo, Raza, TipoInsumo, Veterinario],
       synchronize: true,
