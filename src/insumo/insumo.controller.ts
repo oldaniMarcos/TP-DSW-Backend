@@ -58,4 +58,10 @@ export class InsumoController {
     findEspecie(@Param('codInsumo', ParseIntPipe) codInsumo: number): Promise<TipoInsumo> {
       return this.insumoService.findTipoInsumo(codInsumo);
   }
+
+  @Get('exists/tipo-insumo/:id')
+  async hasInsumoWithTipoInsumo(@Param('id') idTipoInsumo: number): Promise<{ exists: boolean }> {
+  const exists = await this.insumoService.hasInsumoWithTipoInsumo(idTipoInsumo);
+  return { exists };
+  }
 }

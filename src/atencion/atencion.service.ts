@@ -119,13 +119,6 @@ export class AtencionService {
     return count > 0;
   }
 
-  async hasAtencionWithCliente(idCliente: number): Promise<boolean> {
-    return (await this.atencionRepository.count({
-      relations: ['animal', 'animal.cliente'],
-      where: { animal: { cliente: { id: idCliente } } }
-    })) > 0;
-  }
-
   async hasAtencionWithVeterinario(id: number): Promise<boolean> {
     const count = await this.atencionRepository.count({
       where: { veterinario: { idVeterinario: id } }

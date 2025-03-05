@@ -48,4 +48,10 @@ export class RazaController {
   remove(@Param('codRaza', ParseIntPipe) codRaza: number): Promise<void> {
     return this.razaService.remove(codRaza);
   }
+
+  @Get('exists/especie/:id')
+  async hasRazaWithEspecie(@Param('id') idEspecie: number): Promise<{ exists: boolean }> {
+  const exists = await this.razaService.hasRazaWithEspecie(idEspecie);
+  return { exists };
+  }
 }

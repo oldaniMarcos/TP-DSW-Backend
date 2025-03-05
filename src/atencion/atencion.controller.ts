@@ -44,12 +44,6 @@ export class AtencionController {
   return { exists };
 }
 
-  @Get('exists/animal/cliente/:id')
-  async hasAtencionWithCliente(@Param('id') idCliente: number): Promise<{ exists: boolean }> {
-  const exists = await this.atencionService.hasAtencionWithCliente(idCliente);
-  return { exists };
-  }
-
   @Get('exists/veterinario/:id')
   async hasAtencionWithVeterinario(@Param('id') idVeterinario: number): Promise<{ exists: boolean }> {
   const exists = await this.atencionService.hasAtencionWithVeterinario(idVeterinario);

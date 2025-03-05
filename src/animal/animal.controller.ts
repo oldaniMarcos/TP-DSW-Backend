@@ -39,4 +39,10 @@ export class AnimalController {
   findByClienteId(@Param('clienteId') clienteId: number): Promise<Animal[]> {
   return this.animalService.findByClienteId(clienteId);
 }
+
+  @Get('exists/cliente/:id')
+  async hasAnimalWithCliente(@Param('id') idCliente: number): Promise<{ exists: boolean }> {
+  const exists = await this.animalService.hasAnimalWithCliente(idCliente);
+  return { exists };
+}
 }

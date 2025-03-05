@@ -77,4 +77,12 @@ export class RazaService {
   async remove(codRaza: number): Promise<void> {
     await this.razaRepository.delete(codRaza)
   }
+
+  async hasRazaWithEspecie(id: number): Promise<boolean> {
+    const count = await this.razaRepository.count({
+      where: { especie: { codEspecie: id } }
+    });
+  
+    return count > 0;
+  }  
 }
