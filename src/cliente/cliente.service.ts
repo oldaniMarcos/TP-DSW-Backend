@@ -41,9 +41,17 @@ export class ClienteService {
 
   async update(id: number, updateClienteDto: UpdateClienteDto): Promise<Cliente> {
 
-    if (updateClienteDto.password) {
+    const cliente = await this.clienteRepository.findOneBy({ id })
+
+    if (!cliente) {
+      throw new NotFoundException('Cliente no encontrado')
+    }
+
+    if (updateClienteDto.password && updateClienteDto.password !== cliente.password) {
       const saltOrRounds = 10;
       updateClienteDto.password = await bcrypt.hash(updateClienteDto.password, saltOrRounds);
+    } else {
+      updateClienteDto.password = cliente.password
     }
 
     await this.clienteRepository.update(id, updateClienteDto);

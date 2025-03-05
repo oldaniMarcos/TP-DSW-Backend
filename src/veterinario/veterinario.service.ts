@@ -41,4 +41,26 @@ export class VeterinarioService {
   async remove(idVeterinario: number): Promise<void> {
     await this.veterinarioRepository.delete(idVeterinario)
   }
+
+  async checkExistingFields(dni: string, email: string, nroMatricula: string) {
+
+    let existingDni = await this.veterinarioRepository.query(
+      'SELECT * FROM veterinario WHERE dni = ?',
+      [dni]
+    )
+    let existingNroMatricula = await this.veterinarioRepository.query(
+      'SELECT * FROM veterinario WHERE nroMatricula = ?',
+      [nroMatricula]
+    )
+    let existingEmail = await this.veterinarioRepository.query(
+      'SELECT * FROM veterinario WHERE email = ?',
+      [email]
+    )   
+  
+    return { 
+      dni: existingDni.length > 0, 
+      email: existingEmail.length > 0, 
+      nroMatricula: existingNroMatricula.length > 0 
+    };
+  }  
 }

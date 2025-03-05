@@ -35,4 +35,10 @@ export class VeterinarioController {
   remove(@Param('idVeterinario', ParseIntPipe) idVeterinario: number): Promise<void> {
     return this.veterinarioService.remove(idVeterinario);
   }
+
+  @Post('check')
+  async checkClienteExists( @Body() body: {dni: string, email: string, nroMatricula: string})
+  {
+    return await this.veterinarioService.checkExistingFields(body.dni, body.email, body.nroMatricula);
+  }
 }
