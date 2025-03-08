@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreatePrecioAtencionDto } from './dto/create-precio-atencion.dto';
 import { UpdatePrecioAtencionDto } from './dto/update-precio-atencion.dto';
-import { PrecioAtencion } from './entities/precio-atencion.entity.js';
+import { PrecioAtencion } from './entities/precio-atencion.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
