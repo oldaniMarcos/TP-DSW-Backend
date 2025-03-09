@@ -1,4 +1,4 @@
-import { Atencion } from "src/atencion/entities/atencion.entity";
+import { Atencion } from "../../atencion/entities/atencion.entity";
 import { Column, Entity, OneToMany, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()

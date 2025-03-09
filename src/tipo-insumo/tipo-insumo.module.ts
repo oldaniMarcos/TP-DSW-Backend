@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { TipoInsumoService } from './tipo-insumo.service';
 import { TipoInsumoController } from './tipo-insumo.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { TipoInsumo } from './entities/tipo-insumo.entity.js';
+import { TipoInsumo } from './entities/tipo-insumo.entity';
 
 @Module({
   imports: [TypeOrmModule.forFeature([TipoInsumo])],

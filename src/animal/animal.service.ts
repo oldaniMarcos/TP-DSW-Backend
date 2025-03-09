@@ -1,11 +1,11 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateAnimalDto } from './dto/create-animal.dto';
 import { UpdateAnimalDto } from './dto/update-animal.dto';
-import { Animal } from './entities/animal.entity.js';
+import { Animal } from './entities/animal.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Cliente } from 'src/cliente/entities/cliente.entity';
-import { Raza } from 'src/raza/entities/raza.entity';
+import { Cliente } from '../cliente/entities/cliente.entity';
+import { Raza } from '../raza/entities/raza.entity';
 
 @Injectable()
 export class AnimalService {

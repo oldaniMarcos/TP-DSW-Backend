@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { RazaService } from './raza.service';
 import { RazaController } from './raza.controller';
-import { Raza } from './entities/raza.entity.js';
+import { Raza } from './entities/raza.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Especie } from 'src/especie/entities/especie.entity';
+import { Especie } from '../especie/entities/especie.entity';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Raza, Especie])],

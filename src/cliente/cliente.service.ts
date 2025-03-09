@@ -59,7 +59,13 @@ export class ClienteService {
   }
 
   async remove(id: number): Promise<void> {
-    await this.clienteRepository.delete(id)
+    const cliente = await this.clienteRepository.findOneBy({ id });
+
+    if (!cliente) {
+      throw new NotFoundException(`Cliente no encontrado`);
+    }
+  
+    await this.clienteRepository.delete(id);
   }
 
   async findByUsuario(usuario: string): Promise<Cliente | undefined> {

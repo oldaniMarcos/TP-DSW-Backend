@@ -12,7 +12,7 @@ import { InsumoService } from './insumo.service';
 import { CreateInsumoDto } from './dto/create-insumo.dto';
 import { UpdateInsumoDto } from './dto/update-insumo.dto';
 import { Insumo } from './entities/insumo.entity';
-import { TipoInsumo } from 'src/tipo-insumo/entities/tipo-insumo.entity.js';
+import { TipoInsumo } from '../tipo-insumo/entities/tipo-insumo.entity';
 
 @Controller('insumo')
 export class InsumoController {

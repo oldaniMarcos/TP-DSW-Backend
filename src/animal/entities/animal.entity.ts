@@ -1,6 +1,6 @@
-import { Atencion } from "src/atencion/entities/atencion.entity";
-import { Cliente } from "src/cliente/entities/cliente.entity";
-import { Raza } from "src/raza/entities/raza.entity";
+import { Atencion } from "../../atencion/entities/atencion.entity";
+import { Cliente } from "../../cliente/entities/cliente.entity";
+import { Raza } from "../../raza/entities/raza.entity";
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()

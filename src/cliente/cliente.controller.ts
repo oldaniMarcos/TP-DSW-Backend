@@ -1,9 +1,9 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe, UseGuards, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe, UseGuards, Query, NotFoundException } from '@nestjs/common';
 import { ClienteService } from './cliente.service';
 import { CreateClienteDto } from './dto/create-cliente.dto';
 import { UpdateClienteDto } from './dto/update-cliente.dto';
-import { Cliente } from './entities/cliente.entity.js';
-import { Public } from 'src/public/public.decorator';
+import { Cliente } from './entities/cliente.entity';
+import { Public } from '../public/public.decorator';
 
 @Controller('cliente')
 export class ClienteController {
@@ -21,8 +21,12 @@ export class ClienteController {
   }
 
   @Get(':id')
-  findOne(@Param('id', ParseIntPipe) id: number): Promise<Cliente> {
-    return this.clienteService.findOne(id);
+  async findOne(@Param('id') id: number) {
+    const cliente = await this.clienteService.findOne(id);
+    if (!cliente) {
+      throw new NotFoundException(`Cliente con ID ${id} no encontrado`);
+    }
+    return cliente;
   }
 
   @Patch(':id')
@@ -31,8 +35,13 @@ export class ClienteController {
   }
 
   @Delete(':id')
-  remove(@Param('id', ParseIntPipe) id: number): Promise<void> {
-    return this.clienteService.remove(id);
+  async remove(@Param('id') id: number) {
+    const cliente = await this.clienteService.findOne(id);
+    if (!cliente) {
+      throw new NotFoundException(`Cliente con ID ${id} no encontrado`);
+    }
+    await this.clienteService.remove(id);
+    return { message: 'Cliente eliminado correctamente' };
   }
 
   @Public()

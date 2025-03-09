@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { PrecioAtencionService } from './precio-atencion.service';
 import { PrecioAtencionController } from './precio-atencion.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { PrecioAtencion } from './entities/precio-atencion.entity.js';
+import { PrecioAtencion } from './entities/precio-atencion.entity';
 
 @Module({
   imports: [TypeOrmModule.forFeature([PrecioAtencion])],

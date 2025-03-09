@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { AuthService } from './auth.service';
-import { ClienteService } from 'src/cliente/cliente.service';
+import { ClienteService } from '../cliente/cliente.service';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { UnauthorizedException, NotFoundException } from '@nestjs/common';

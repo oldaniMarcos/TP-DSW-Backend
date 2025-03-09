@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { EspecieService } from './especie.service';
 import { EspecieController } from './especie.controller';
-import { Especie } from './entities/especie.entity.js';
+import { Especie } from './entities/especie.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({

@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { VeterinarioService } from './veterinario.service';
 import { VeterinarioController } from './veterinario.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Veterinario } from './entities/veterinario.entity.js';
+import { Veterinario } from './entities/veterinario.entity';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Veterinario])],

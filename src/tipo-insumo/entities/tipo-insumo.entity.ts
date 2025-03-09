@@ -1,4 +1,4 @@
-import { Insumo } from "src/insumo/entities/insumo.entity";
+import { Insumo } from "../../insumo/entities/insumo.entity";
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()

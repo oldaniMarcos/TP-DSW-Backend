@@ -4,7 +4,7 @@ import { UpdateRazaDto } from './dto/update-raza.dto';
 import { Raza } from './entities/raza.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Especie } from 'src/especie/entities/especie.entity';
+import { Especie } from '../especie/entities/especie.entity';
 
 @Injectable()
 export class RazaService {

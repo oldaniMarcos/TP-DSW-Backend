@@ -2,8 +2,8 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from 
 import { EspecieService } from './especie.service';
 import { CreateEspecieDto } from './dto/create-especie.dto';
 import { UpdateEspecieDto } from './dto/update-especie.dto';
-import { Especie } from './entities/especie.entity.js';
-import { Raza } from 'src/raza/entities/raza.entity';
+import { Especie } from './entities/especie.entity';
+import { Raza } from '../raza/entities/raza.entity';
 
 @Controller('especie')
 export class EspecieController {

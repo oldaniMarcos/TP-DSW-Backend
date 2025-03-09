@@ -2,7 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from 
 import { VeterinarioService } from './veterinario.service';
 import { CreateVeterinarioDto } from './dto/create-veterinario.dto';
 import { UpdateVeterinarioDto } from './dto/update-veterinario.dto';
-import { Veterinario } from './entities/veterinario.entity.js';
+import { Veterinario } from './entities/veterinario.entity';
 
 
 @Controller('veterinario')

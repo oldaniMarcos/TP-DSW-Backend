@@ -1,4 +1,4 @@
-import { Raza } from "src/raza/entities/raza.entity";
+import { Raza } from "../../raza/entities/raza.entity";
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()

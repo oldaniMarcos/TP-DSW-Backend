@@ -1,5 +1,5 @@
-import { PrecioInsumo } from "src/precio-insumo/entities/precio-insumo.entity";
-import { TipoInsumo } from "src/tipo-insumo/entities/tipo-insumo.entity";
+import { PrecioInsumo } from "../../precio-insumo/entities/precio-insumo.entity";
+import { TipoInsumo } from "../../tipo-insumo/entities/tipo-insumo.entity";
 import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity() 

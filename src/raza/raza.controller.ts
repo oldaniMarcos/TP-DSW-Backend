@@ -12,7 +12,7 @@ import { RazaService } from './raza.service';
 import { CreateRazaDto } from './dto/create-raza.dto';
 import { UpdateRazaDto } from './dto/update-raza.dto';
 import { Raza } from './entities/raza.entity';
-import { Especie } from 'src/especie/entities/especie.entity.js';
+import { Especie } from '../especie/entities/especie.entity';
 
 @Controller('raza')
 export class RazaController {

@@ -1,10 +1,10 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateEspecieDto } from './dto/create-especie.dto';
 import { UpdateEspecieDto } from './dto/update-especie.dto';
-import { Especie } from './entities/especie.entity.js';
+import { Especie } from './entities/especie.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Raza } from 'src/raza/entities/raza.entity';
+import { Raza } from '../raza/entities/raza.entity';
 
 @Injectable()
 export class EspecieService {

@@ -4,7 +4,7 @@ import { UpdatePrecioInsumoDto } from './dto/update-precio-insumo.dto';
 import { PrecioInsumo } from './entities/precio-insumo.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Insumo } from 'src/insumo/entities/insumo.entity';
+import { Insumo } from '../insumo/entities/insumo.entity';
 
 @Injectable()
 export class PrecioInsumoService {

@@ -1,5 +1,5 @@
-import { Animal } from "src/animal/entities/animal.entity";
-import { Especie } from "src/especie/entities/especie.entity";
+import { Animal } from "../../animal/entities/animal.entity";
+import { Especie } from "../../especie/entities/especie.entity";
 import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()

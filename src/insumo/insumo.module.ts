@@ -2,8 +2,8 @@ import { Module } from '@nestjs/common';
 import { InsumoService } from './insumo.service';
 import { InsumoController } from './insumo.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Insumo } from './entities/insumo.entity.js';
-import { TipoInsumo } from 'src/tipo-insumo/entities/tipo-insumo.entity';
+import { Insumo } from './entities/insumo.entity';
+import { TipoInsumo } from '../tipo-insumo/entities/tipo-insumo.entity';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Insumo, TipoInsumo])],

@@ -2,7 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from 
 import { AtencionService } from './atencion.service';
 import { CreateAtencionDto } from './dto/create-atencion.dto';
 import { UpdateAtencionDto } from './dto/update-atencion.dto';
-import { Atencion } from './entities/atencion.entity.js';
+import { Atencion } from './entities/atencion.entity';
 
 @Controller('atencion')
 export class AtencionController {

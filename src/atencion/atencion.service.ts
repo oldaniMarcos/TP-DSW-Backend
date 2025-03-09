@@ -1,13 +1,13 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateAtencionDto } from './dto/create-atencion.dto';
 import { UpdateAtencionDto } from './dto/update-atencion.dto';
-import { Atencion } from './entities/atencion.entity.js';
+import { Atencion } from './entities/atencion.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Animal } from 'src/animal/entities/animal.entity';
-import { PrecioAtencion } from 'src/precio-atencion/entities/precio-atencion.entity';
-import { Veterinario } from 'src/veterinario/entities/veterinario.entity';
-import { Insumo } from 'src/insumo/entities/insumo.entity';
+import { Animal } from '../animal/entities/animal.entity';
+import { PrecioAtencion } from '../precio-atencion/entities/precio-atencion.entity';
+import { Veterinario } from '../veterinario/entities/veterinario.entity';
+import { Insumo } from '../insumo/entities/insumo.entity';
 
 @Injectable()
 export class AtencionService {
