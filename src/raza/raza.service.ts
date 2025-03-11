@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { CreateRazaDto } from './dto/create-raza.dto';
 import { UpdateRazaDto } from './dto/update-raza.dto';
 import { Raza } from './entities/raza.entity';
@@ -55,7 +55,6 @@ export class RazaService {
       raza.especie = especie;
     }
 
-    // actualiza el resto de los campos
     Object.assign(raza, updateFields);
 
     return this.razaRepository.save(raza);

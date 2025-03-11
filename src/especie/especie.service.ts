@@ -41,13 +41,13 @@ export class EspecieService {
   async findRazasByEspecieId(codEspecie: number): Promise<Raza[]> {
     const especie = await this.especieRepository.findOne({
       where: { codEspecie },
-      relations: ['razas'], // Asegúrate de incluir la relación con razas
+      relations: ['razas'],
     });
 
     if (!especie) {
       throw new NotFoundException('Especie no encontrada');
     }
 
-    return especie.razas; // Devuelve las razas asociadas a la especie
+    return especie.razas;
   }
 }

@@ -15,7 +15,7 @@ export class Insumo {
   stock: number;
 
   @Column()
-  fechaVencimiento: string; // Las fechas van del 0 al 11 (0 = Enero)
+  fechaVencimiento: string;
 
   @ManyToOne(() => TipoInsumo, (tipoInsumo) => tipoInsumo.insumos)
   tipoInsumo: TipoInsumo;

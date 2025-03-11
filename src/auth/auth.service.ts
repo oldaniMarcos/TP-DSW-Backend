@@ -12,18 +12,6 @@ type SignInData = {
     email: string;
     rol: string;
 }
-type AuthResult = { 
-    token: string;
-    user: {
-        id: number;
-        usuario: string;
-        nombreYApellido: string;
-        dni: string;
-        email: string;
-        rol: string;
-    }
-}
-
 
 @Injectable()
 export class AuthService {
@@ -32,7 +20,7 @@ export class AuthService {
         private jwtService: JwtService
     ) {}
 
-    async authenticate(input: AuthInput): Promise<AuthResult> {
+    async authenticate(input: AuthInput): Promise<{token: string}> {
         const usuario = await this.validateUsuario(input)
 
         return this.signIn(usuario)
@@ -60,7 +48,7 @@ export class AuthService {
         }
     }
 
-    async signIn(usuario: SignInData): Promise<AuthResult> {
+    async signIn(usuario: SignInData): Promise<{token: string}> {
         const payload = {
             sub: usuario.id,
             usuario: usuario.usuario,
@@ -69,16 +57,6 @@ export class AuthService {
 
         const token = await this.jwtService.signAsync(payload)
 
-        return {
-            token,
-            user: {
-                id: usuario.id,
-                usuario: usuario.usuario,
-                nombreYApellido: usuario.nombreYApellido,
-                dni: usuario.dni,
-                email: usuario.email,
-                rol: usuario.rol,
-            }
-        }
+        return { token }
     }
 }

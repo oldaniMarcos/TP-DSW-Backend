@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { CreateInsumoDto } from './dto/create-insumo.dto';
 import { UpdateInsumoDto } from './dto/update-insumo.dto';
 import { Insumo } from './entities/insumo.entity';
@@ -19,12 +19,6 @@ export class InsumoService {
 
 
   async create(createInsumoDto: CreateInsumoDto): Promise<Insumo> {
-    /*const insumo = new Insumo();
-    insumo.descripcion = createInsumoDto.descripcion;
-    insumo.stock = createInsumoDto.stock;
-    insumo.fechaVencimiento = createInsumoDto.fechaVencimiento
-
-    return this.insumoRepository.save(insumo);*/
 
     const { descripcion, stock, fechaVencimiento, idTipoInsumo } = createInsumoDto;
     const tipoInsumo = await this.tipoInsumoRepository.findOneBy({ codTipoInsumo: idTipoInsumo });
@@ -51,11 +45,6 @@ export class InsumoService {
   }
 
   async update(codInsumo: number, updateInsumoDto: UpdateInsumoDto): Promise<Insumo> {
-    
-    /*
-    await this.insumoRepository.update(codInsumo, updateInsumoDto)
-    return this.insumoRepository.findOneBy({ codInsumo });
-    */
 
     const { idTipoInsumo, ...updateFields } = updateInsumoDto;
 
@@ -64,7 +53,6 @@ export class InsumoService {
       throw new Error('Insumo no encontrado');
     }
 
-    // actualiza la relacion si se provee un tipo insumo
     if (idTipoInsumo) {
       const tipoInsumo = await this.tipoInsumoRepository.findOneBy({ codTipoInsumo: idTipoInsumo });
       if (!tipoInsumo) {
@@ -73,7 +61,6 @@ export class InsumoService {
       insumo.tipoInsumo = tipoInsumo;
     }
 
-    // actualiza el resto de los campos
     Object.assign(insumo, updateFields);
 
     return this.insumoRepository.save(insumo);

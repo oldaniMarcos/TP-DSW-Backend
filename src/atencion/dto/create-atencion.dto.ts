@@ -1,4 +1,4 @@
-import { IsArray, IsDateString, IsNotEmpty, isNumber, IsNumber, IsOptional, IsString } from "class-validator";
+import { IsArray, IsDateString, IsNotEmpty, IsNumber, IsString } from "class-validator";
 
 export class CreateAtencionDto {
 

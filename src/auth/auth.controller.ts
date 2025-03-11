@@ -1,10 +1,11 @@
-import { Body, Controller, Get, Post, Request } from '@nestjs/common';
+import { Body, Controller, Get, Post, Request, UnauthorizedException } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { Public } from '../public/public.decorator';
+import { ClienteService } from '../cliente/cliente.service';
 
 @Controller('auth')
 export class AuthController {
-    constructor(private authService: AuthService) {}
+    constructor(private authService: AuthService, private clienteService: ClienteService) {}
 
     @Public()
     @Post('login')
@@ -13,7 +14,11 @@ export class AuthController {
     }
 
     @Get('me')
-    getUsuario(@Request() request) {
-        return request.usuario
+    async getUser(@Request() request) {        
+
+        if(!request.usuario) throw new UnauthorizedException('Usuario no encontrado')
+        
+        const userId = request.usuario.id
+        return this.clienteService.findOne(userId)
     }
 }

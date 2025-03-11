@@ -6,7 +6,7 @@ export class UpdateAtencionDto extends PartialType(CreateAtencionDto) {
 
   @IsOptional()
   @IsDateString()
-  @IsNotEmpty()       // -> es opcional actualizar la fecha, pero si lo hago, no son vacias
+  @IsNotEmpty()
   fechaHora?: string;
 
   @IsOptional()

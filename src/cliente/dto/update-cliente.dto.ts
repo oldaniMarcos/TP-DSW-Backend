@@ -12,7 +12,7 @@ export class UpdateClienteDto extends PartialType(CreateClienteDto) {
   @IsOptional()
   nombreYApellido?: string;
 
-  @IsString() //IsPhoneNumber()
+  @IsString()
   @IsOptional()
   telefono?: string;
 

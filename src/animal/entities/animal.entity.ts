@@ -1,7 +1,7 @@
 import { Atencion } from "../../atencion/entities/atencion.entity";
 import { Cliente } from "../../cliente/entities/cliente.entity";
 import { Raza } from "../../raza/entities/raza.entity";
-import { Column, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Animal {
@@ -19,7 +19,6 @@ export class Animal {
     cliente: Cliente;
 
     @ManyToOne(() => Raza, (raza) => raza.animales ) 
-    //@JoinColumn()
     raza: Raza;
 
     @OneToMany(() => Atencion, (atenciones) => atenciones.animal)
