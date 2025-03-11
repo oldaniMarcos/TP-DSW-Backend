@@ -55,7 +55,7 @@ export class InsumoController {
   }
 
   @Get(':codInsumo/tipo-insumo')
-    findEspecie(@Param('codInsumo', ParseIntPipe) codInsumo: number): Promise<TipoInsumo> {
+    findTipoInsumo(@Param('codInsumo', ParseIntPipe) codInsumo: number): Promise<TipoInsumo> {
       return this.insumoService.findTipoInsumo(codInsumo);
   }
 
