@@ -80,7 +80,7 @@ export class AnimalService {
     return this.animalRepository.find({ where: { cliente: { id: clienteId } } });
   }
 
-  async hasAnimalWithCliente(clienteId: number): Promise<boolean> {
+  async clienteHasAnimal(clienteId: number): Promise<boolean> {
     const count = await this.animalRepository.count({
       where: { cliente: { id: clienteId } }
     });

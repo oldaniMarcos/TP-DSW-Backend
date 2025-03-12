@@ -54,15 +54,7 @@ describe('AuthService', () => {
       const result = await authService.authenticate(authInput);
 
       expect(result).toEqual({
-        token: 'mockedToken',
-        user: {
-          id: 1,
-          usuario: 'test',
-          nombreYApellido: 'Test',
-          dni: '12345678',
-          email: 'test@example.com',
-          rol: 'admin',
-        },
+        token: 'mockedToken'
       });
     });
 

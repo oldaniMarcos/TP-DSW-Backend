@@ -50,8 +50,8 @@ export class RazaController {
   }
 
   @Get('exists/especie/:id')
-  async hasRazaWithEspecie(@Param('id') idEspecie: number): Promise<{ exists: boolean }> {
-  const exists = await this.razaService.hasRazaWithEspecie(idEspecie);
+  async especieHasRaza(@Param('id') idEspecie: number): Promise<{ exists: boolean }> {
+  const exists = await this.razaService.especieHasRaza(idEspecie);
   return { exists };
   }
 }

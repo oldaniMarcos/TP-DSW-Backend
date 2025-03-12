@@ -37,7 +37,7 @@ export class VeterinarioController {
   }
 
   @Post('check')
-  async checkClienteExists( @Body() body: {dni: string, email: string, nroMatricula: string})
+  async checkExistingFields( @Body() body: {dni: string, email: string, nroMatricula: string})
   {
     return await this.veterinarioService.checkExistingFields(body.dni, body.email, body.nroMatricula);
   }

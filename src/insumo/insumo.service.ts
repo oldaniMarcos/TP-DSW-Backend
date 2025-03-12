@@ -97,7 +97,7 @@ export class InsumoService {
       return insumo.tipoInsumo;
     }
 
-    async hasInsumoWithTipoInsumo(id: number): Promise<boolean> {
+    async tipoInsumoHasInsumo(id: number): Promise<boolean> {
       const count = await this.insumoRepository.count({
         where: { tipoInsumo: { codTipoInsumo: id } }
       });

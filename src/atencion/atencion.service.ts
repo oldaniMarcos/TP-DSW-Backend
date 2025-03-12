@@ -111,7 +111,7 @@ export class AtencionService {
     });
   }
 
-  async hasAtencionWithAnimal(id: number): Promise<boolean> {
+  async animalHasAtencion(id: number): Promise<boolean> {
     const count = await this.atencionRepository.count({
       where: { animal: { nroHistClinica: id } }
     });
@@ -119,7 +119,7 @@ export class AtencionService {
     return count > 0;
   }
 
-  async hasAtencionWithVeterinario(id: number): Promise<boolean> {
+  async veterinarioHasAtencion(id: number): Promise<boolean> {
     const count = await this.atencionRepository.count({
       where: { veterinario: { idVeterinario: id } }
     });
